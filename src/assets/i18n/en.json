@@ -3,7 +3,11 @@
       "login": "Send",
       "logout": "logout",
       "menu": "Menu",
-      "back": "back"
+      "back": "back",
+      "Add": "Add",
+      "Modify": "Modify",
+      "Inspect": "Inspect",
+      "Delete": "Delete"
     },
     "header": {
       "title": "OASP4JS",

@@ -25,4 +25,8 @@ export class BussinessOperatorProvider {
   getCsrf() {
       return this.restPath + 'security/v1/csrftoken';
   }
+  tableserv(){
+      return this.restPath + 'ionicBasic/v1/sample/';
+  }
+
 }

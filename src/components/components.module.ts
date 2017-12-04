@@ -3,11 +3,14 @@ import { NgModule } from '@angular/core';
 
 
 import { HeaderComponent } from './header/header';
+import { SearchComponent } from './search/search';
 @NgModule({
 	declarations: [
-    HeaderComponent],
+    HeaderComponent,
+    SearchComponent],
 	imports: [],
 	exports: [
-    HeaderComponent]
+    HeaderComponent,
+    SearchComponent]
 })
 export class ComponentsModule {}

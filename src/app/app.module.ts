@@ -23,6 +23,10 @@ import { TranslateLoader } from '@ngx-translate/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HeaderComponent } from '../components/header/header';
+import { TablemanagementProvider } from '../providers/tablemanagement/tablemanagement';
+import { TablePage } from '../pages/table/table';
+import { TablestoreProvider } from '../providers/tablemanagement/tablestore';
+
 
 //import { HttpRequestInterceptorProvider } from '../providers/shared/http-request-interceptor';
 
@@ -39,7 +43,8 @@ export function translateFactory(http: HttpClient) {
     MyApp,
     HomePage,
     WelcomePage,
-    HeaderComponent
+    HeaderComponent,
+    TablePage
   ],
   imports: [
     BrowserModule,
@@ -58,10 +63,9 @@ export function translateFactory(http: HttpClient) {
     MyApp,
     HomePage,
     WelcomePage,
+    TablePage,
   ],
   providers: [
-
-    
 
     TranslateModule,
     StatusBar,
@@ -74,8 +78,10 @@ export function translateFactory(http: HttpClient) {
     {provide: HTTP_INTERCEPTORS,
       useClass: HttpinterceptorProvider,
       multi: true},
-    
-    
+    TablemanagementProvider,
+    TablestoreProvider,
+
+        
   ]
 })
 export class AppModule {}

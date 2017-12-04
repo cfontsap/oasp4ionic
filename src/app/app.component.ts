@@ -5,6 +5,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
+import { TablePage } from '../pages/table/table';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +26,8 @@ export class MyApp {
       
       this.pages = [
         { title: 'Home', component:  HomePage},
-        { title: 'Welcome', component: WelcomePage}
+        { title: 'Welcome', component: WelcomePage},
+        { title : 'Table', component: TablePage}
       ];
     });
   }

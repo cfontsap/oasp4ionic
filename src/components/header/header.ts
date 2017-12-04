@@ -1,3 +1,4 @@
+import { TablePage } from '../../pages/table/table';
 import { HomePage } from '../../pages/home/home';
 import { WelcomePage } from '../../pages/welcome/welcome'
 import { NavController } from 'ionic-angular';
@@ -43,7 +44,7 @@ export class HeaderComponent {
       
       { title: 'Welcome', component: WelcomePage},
       { title: 'Home', component:  HomePage},
-      { title: 'AAAAA', component:  HomePage},
+      { title: 'Table', component: TablePage}
     ];
   }
 
