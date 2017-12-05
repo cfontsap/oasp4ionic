@@ -1,3 +1,4 @@
+
 import { HttpinterceptorProvider } from '../providers/security/httpinterceptor';
 import { AuthServiceProvider } from '../providers/security/auth-service';
 
@@ -44,7 +45,7 @@ export function translateFactory(http: HttpClient) {
     HomePage,
     WelcomePage,
     HeaderComponent,
-    TablePage
+    TablePage,
   ],
   imports: [
     BrowserModule,

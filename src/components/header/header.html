@@ -24,7 +24,7 @@
                   <img src="../../assets/imgs/englishflag.png" style="width : 40% ; height : 40%" (click)="togglelanguage('EN')" >
               </ion-col>
               <ion-col>
-                  <button ion-button  icon-end  (click)="logout()" >
+                  <button ion-button  icon-end *ngIf="isauthenthicated()" (click)="logout()" >
                       {{'buttons.logout'| translate}}
                       <ion-icon name="exit"></ion-icon>
                     </button>

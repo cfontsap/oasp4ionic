@@ -61,7 +61,7 @@ export class HeaderComponent {
 
   logout(){
     this.loginp.IonicAngularLogout();
-    console.log(this.auth.getToken());
+    // console.log(this.auth.getToken());
     this.navCtrl.setRoot(HomePage);
   }
   currentlanguage(lang: String){

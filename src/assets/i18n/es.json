@@ -20,6 +20,24 @@
       "subtitle":"Usuario o contraseña erroneo",
       "dismiss":"cerrar"
     },
+    "ADD":{
+      "TITLE":"Añadir",
+      "MESSAGE":"Aqui puedes añadir nuevos usuarios",
+      "NAME": "Nombre",
+      "SURNAME": "Apellido",
+      "AGE": "Edad",
+      "SEND": "Enviar",
+      "DISMISS":"Cerrar"
+    },
+    "MODIFY":{
+      "TITLE":"Modificar",
+      "MESSAGE":"Aqui puedes modificar el usuario seleccionado",
+      "NAME": "Nombre",
+      "SURNAME": "Apellido",
+      "AGE": "Edad",
+      "SEND": "Enviar",
+      "DISMISS":"Cerrar"
+    },
     "login": {
       "user": "Usuario",
       "username": "Username",

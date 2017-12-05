@@ -6,6 +6,36 @@
 -->
 <ion-header >
     <layoutheader></layoutheader>
+    <ion-grid>
+            <ion-row>
+                <ion-col>
+                        <button ion-button  icon-end  (click)="DetailsClicked()" >
+                            {{'buttons.Inspect'| translate}}
+                            <ion-icon name="exit"></ion-icon>
+                        </button>
+                </ion-col>
+                <ion-col>
+                        <button ion-button  icon-end  (click)="promptAddClicked()" >
+                            {{'buttons.Add'| translate}}
+                            <ion-icon name="exit"></ion-icon>
+                        </button>
+                </ion-col>
+                <ion-col>
+                        <button ion-button  icon-end  (click)="promptModifyClicked()" >
+                            {{'buttons.Modify'| translate}}
+                            <ion-icon name="exit"></ion-icon>
+                        </button>
+                </ion-col>
+                    
+                <ion-col>
+                        <button ion-button  icon-end  (click)="DeleteClicked()" >
+                            {{'buttons.Delete'| translate}}
+                            <ion-icon name="exit"></ion-icon>
+                        </button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
   </ion-header>
 
 
@@ -14,42 +44,15 @@
   <ion-grid>
     <ion-row  *ngFor="let p of tabletoshow; let i = index" [(ngModel)]="checkboxes" ngDefaultControl >
           <ion-col>
-            
           <ion-checkbox (click)="onclick(i)" checked="{{p.checkbox}}"></ion-checkbox>
-          
           </ion-col>
           <ion-col>{{p.name}}</ion-col>
           <ion-col>{{p.surname}}</ion-col>
           <ion-col>{{p.age}}</ion-col>
-      
-
     </ion-row>
-    <ion-row >
-        <ion-col>
-            <button ion-button  icon-end  (click)="Inspect()" >
-                {{'buttons.Inspect'| translate}}
-                <ion-icon name="exit"></ion-icon>
-            </button>
-        </ion-col>
-        <ion-col>
-            <button ion-button  icon-end  (click)="AddPushed()" >
-                {{'buttons.Add'| translate}}
-                <ion-icon name="exit"></ion-icon>
-            </button>
-        </ion-col>
-        <ion-col>
-            <button ion-button  icon-end  (click)="logout()" >
-                {{'buttons.Modify'| translate}}
-                <ion-icon name="exit"></ion-icon>
-            </button>
-        </ion-col>
-        
-        <ion-col>
-            <button ion-button  icon-end  (click)="DeletePushed()" >
-                {{'buttons.Delete'| translate}}
-                <ion-icon name="exit"></ion-icon>
-            </button>
-        </ion-col>
+
+    <ion-row>
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     </ion-row>
   </ion-grid>
 

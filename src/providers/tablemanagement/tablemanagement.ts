@@ -15,42 +15,33 @@ export class TablemanagementProvider {
 
   constructor(public http: HttpClient, public BO: BussinessOperatorProvider) {
     // console.log('Hello TablemanagementProvider Provider');
-  }
+
+ }
 
   getTableM(): Observable<any> {
     return this.http.post(this.BO.tableserv()+"search",{ }, { } );
   }
 
   NewItemM(fullitem : any){
-
-    // let contructingitem = {name: fullitem.name, surname: fullitem.surname, age: fullitem.age };
-    let contructingitem = {name: "jon", surname: "jon", age: 222 };
-
+    let contructingitem = fullitem;
     return this.http.post(this.BO.tableserv(),contructingitem,{});
   }
 
-  DeleteItemM(fullitem : any){
-    this.http.post(this.BO.tableserv()+"search",{ name: "jon" }, { }).subscribe(
-      (data: any) => {
-        //console.log(data.result[0].id);
-        if(data){
-          return this.http.delete(this.BO.tableserv()+data.result[0].id, {}).subscribe(
-              (datadel:any) => {
-                  console.log(datadel);
-              }
-          )
-        }
-      }
-    )
+  getItemId(searchitem : any ): Observable<any> {
+    return this.http.post(this.BO.tableserv()+"search",searchitem,{});
   }
 
-  ModifyItemM(fullitem : any){
-    this.http.post(this.BO.tableserv()+"search",{ name: "jon"}, { }).subscribe(
-      (data: any) => {
-        
-        return this.http.post(this.BO.tableserv()+"search", {id: data.result.id}, {});
-      }
-    )
+  DeleteItem(id : any) {
+          return this.http.delete(this.BO.tableserv()+id, {});
+  }
+
+
+
+  ModifyItem(fullitem : any) : Observable<any> {
+      // console.log(fullitem);
+      //console.log(fullitem.id +" just before call");
+      return this.http.post(this.BO.tableserv()+"modify",fullitem, { });
+
   }
 
 }
