@@ -2,32 +2,30 @@
   <ion-row justify-content-center>
     <ion-col col-auto>
     <button ion-button  icon-end  (click)="promptAddClicked()" >
-      {{'buttons.Add'| translate}}
+      
       <ion-icon name="add-circle"></ion-icon>
     </button>
     </ion-col>
     <ion-col col-auto >
     <button ion-button  icon-end  (click)="promptModifyClicked()"  >
-      {{'buttons.Modify'| translate}}
+      
       <ion-icon name="brush"></ion-icon>
     </button>
     </ion-col>
 
     <ion-col col-auto >
-      <button ion-button  icon-end  (click)="DeleteClicked()"  >
-      {{'buttons.Delete'| translate}}
+      <button ion-button  icon-end  (click)="doConfirm()"  >
+      
       <ion-icon name="trash"></ion-icon>
       </button>
     </ion-col >
     <ion-col [(ngModel)]="checkbox" ngDefaultControl col-auto >
       <button ion-button  icon-end  (click)="promptFilterClicked()" >
-      {{'buttons.Filter'| translate}}
       <ion-icon name="search"></ion-icon>
       </button>
-      
     </ion-col>
-    <ion-col col-auto >
-        <ion-toggle (click)="onclick()" checked="{{checkbox}}"> </ion-toggle >
+    <ion-col  [(ngModel)]="checkbox" ngDefaultControl col-auto >
+        <ion-toggle (ionchange)="onclick()" checked="{{checkbox}}"> </ion-toggle >
     </ion-col>
   </ion-row>
 </ion-grid>

@@ -40,6 +40,12 @@
       "TITLE":"Filter form",
       "MESSAGE":"Search for something"
     },
+    "DELETE":{
+      "TITLE":"Delete Confirmation",
+      "MESSAGE":"Do you want to delete the selected element?",
+      "DISMISS":"No, cancel",
+      "CONFIRM":"Yes"
+    },
     "login": {
       "user": "Login",
       "username": "Username",

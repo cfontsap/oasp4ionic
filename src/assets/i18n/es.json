@@ -40,6 +40,12 @@
       "TITLE":"Buscar",
       "MESSAGE":"Busca cosas"
     },
+    "DELETE":{
+      "TITLE":"Confirmación de borrado",
+      "MESSAGE":"Quieres borrar el elemento seleccionado?",
+      "DISMISS":"No, cancelar",
+      "CONFIRM":"SI"
+    },
     "login": {
       "user": "Usuario",
       "username": "Username",

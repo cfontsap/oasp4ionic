@@ -16,6 +16,7 @@ import { TablemanagementProvider } from '../../../../providers/tablemanagement/t
   templateUrl: 'table-operations.html'
 })
 export class TableOperationsComponent {
+  alerCtrl: any;
 
   text: string;
   tabletoshow: any;
@@ -28,8 +29,8 @@ export class TableOperationsComponent {
 
   checkbox : boolean = false;
   onclick(){
-    // console.log(this.checkbox)
 
+  
     if(this.checkbox == true) {
       this.checkbox = false;
       this.tableManagement.getTableM().subscribe(
@@ -202,6 +203,7 @@ export class TableOperationsComponent {
 
   // deletes the selected element
   DeleteClicked() {
+
     this.UpdateTable()
     let index = this.tablemain.getindex();
     if (!index) {
@@ -219,6 +221,48 @@ export class TableOperationsComponent {
     )
   }
 
+
+  doConfirm(){
+    
+    // console.log(a);
+    if(this.tablemain.getindex() == null) return;
+    let a: any = {};
+    this.translate.get('DELETE'+'.TITLE').subscribe(t => {
+      a.title = t;
+    });
+    this.translate.get('DELETE'+'.MESSAGE').subscribe(t => {
+      a.message = t;
+    });
+    this.translate.get('DELETE.DISMISS').subscribe(t => 
+    {
+      a.dismiss = t;
+    });
+    this.translate.get('DELETE.CONFIRM').subscribe(t => 
+    {
+      a.Confirm = t;
+    });
+
+    let prompt = this.alertCtrl.create({
+      title: a.title,
+      message: a.message,
+      buttons: [
+        {
+          text: a.dismiss,
+          handler: data => {
+            // console.log(a);
+          }
+        },
+        {
+          text: a.Confirm,
+          handler: data => {
+            this.DeleteClicked();
+            //console.log(data.surname);
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
 
   promptModifyClicked() {
     this.UpdateTable()
