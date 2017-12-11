@@ -22,7 +22,7 @@ export class TablePage {
 
   tabletoshowbefore :  [{name: string,surname:string, age: number, checkbox:boolean }];
   tabletoshow : any = []
-  checkboxes : boolean[] = [true, true, true, true];
+  PAGINATIONTRESHOLD = 15;
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
@@ -46,6 +46,7 @@ export class TablePage {
   }
 
   ping(){
+    
     this.ionViewDidLoad();
   }
 
@@ -63,43 +64,36 @@ export class TablePage {
 
   doInfinite(infiniteScroll){
 
-    //console.log('Begin async operation');
-    //console.log(this.indexforpagination);
         setTimeout(() => {
           for (let i = 0; i < 10; i++) {
             if(this.tabletoshowbefore[this.indexforpagination]){
               this.tabletoshow.push( this.tabletoshowbefore[this.indexforpagination]);
               this.indexforpagination++;
             }
-          }
-    
-    //console.log('Async operation has ended');
+          } 
           infiniteScroll.complete();
         }, 500);
       }
 
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad TablePage');
+    
     this.tabletoshow = [];
     this.tableManagement.getTableM().subscribe( 
       (data:any) =>{
         this.tableStore.setTableS(data.result);
         this.tabletoshowbefore = this.tableStore.getTableS();
-        for(let i = 0; i<15; i++){
+        for(let i = 0; i<this.PAGINATIONTRESHOLD; i++){
           if(this.tabletoshowbefore[i]) this.tabletoshow.push(this.tabletoshowbefore[i]);
-          this.indexforpagination++;
         }
-        // console.log(this.tabletoshow);
-        //console.log(data.result);
+        this.indexforpagination = this.PAGINATIONTRESHOLD;
+
       }, (err) => {
         console.log(err);
       }
 
     )
-    // this.tableStore.setTableS("");
-    //this.tabletoshow = this.tableStore.getTableS();
-    //console.log(this.tabletoshow);
+
   }
 
 }

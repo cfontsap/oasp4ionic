@@ -16,7 +16,7 @@ export class MyApp {
   pages:any;
   
   user = {name: 'a', password: 'a'};
-
+  language = 'EN';
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private auth: AuthServiceProvider ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

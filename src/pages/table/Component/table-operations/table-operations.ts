@@ -19,13 +19,32 @@ export class TableOperationsComponent {
 
   text: string;
   tabletoshow: any;
+  
 
   constructor(public translate: TranslateService, public alertCtrl: AlertController, public tableManagement: TablemanagementProvider,
     public tableStore: TablestoreProvider, public tablemain: TablePage) {
     this.text = 'Hello World';
   }
 
+  checkbox : boolean = false;
+  onclick(){
+    // console.log(this.checkbox)
 
+    if(this.checkbox == true) {
+      this.checkbox = false;
+      this.tableManagement.getTableM().subscribe(
+      (data: any) => {
+        for (let i in data.result){
+          data.result[i].checkbox = false;
+        }
+        this.tablemain.tabletoshow = data.result;
+      }
+      )
+    } else {
+      this.checkbox = false;
+    }
+    
+  }
   prompTranslations(Code:string) : any {
     let a: any = {};
     this.translate.get(Code+'.TITLE').subscribe(t => {
@@ -83,6 +102,7 @@ export class TableOperationsComponent {
           text: a.send,
           handler: data => {
             this.getItems(data);
+            this.checkbox = true;
             //console.log(data.surname);
           }
         }
@@ -100,8 +120,14 @@ export class TableOperationsComponent {
 
     this.tableManagement.Filter(ev).subscribe(
       (data: any) => {
+
+        for(let i in data.result){
+            data.result[i].checkbox = false;
+        }
         this.tableStore.setTableS = data.result;
         this.tablemain.tabletoshow = data.result;
+        this.checkbox = true;
+        // console.log(this.checkbox);
       }
     )
   }
@@ -139,6 +165,7 @@ export class TableOperationsComponent {
           text: a.send,
           handler: data => {
             this.AddClicked(data);
+            
             //console.log(data.surname);
           }
         }
@@ -202,7 +229,7 @@ export class TableOperationsComponent {
     index--;
 
     let a = this.prompTranslations("MODIFY");
-    console.log(a);
+    // console.log(a);
 
     let prompt = this.alertCtrl.create({
       title: a.title,

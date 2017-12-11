@@ -20,7 +20,7 @@ import { LoginProvider } from '../../providers/login/loginProvider';
 export class HeaderComponent {
   defaultTitle = "Wrong Title"
   _text: string;
-  language= 'EN';
+  language = 'EN'
   pages:any;
 
   @Input()
@@ -50,7 +50,7 @@ export class HeaderComponent {
 
 
   togglelanguage(lang: string){
-    // console.log(lang + " arrived");
+    
     this.translate.use(lang);
     this.language = lang;
   }
@@ -66,8 +66,8 @@ export class HeaderComponent {
   }
   currentlanguage(lang: String){
     if( lang == this.language ) {
-      return false;
+      return true;
     }
-    return true;
+    return false;
   }
 }
