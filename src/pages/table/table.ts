@@ -51,29 +51,82 @@ export class TablePage {
     this.ionViewDidLoad();
   }
 
+  promptFilterClicked(){
+    let a: any = {};
+    this.translate.get('FILTER.TITLE').subscribe(t => {
+      a.title = t;
+    });
+    this.translate.get('FILTER.MESSAGE').subscribe(t => {
+      a.message = t;
+    });
+    this.translate.get('COMMONPROMPT.DISMISS').subscribe(t => {
+      a.dismiss = t;
+    });
+    this.translate.get('COMMONPROMPT.SEND').subscribe(t => {
+      a.send = t;
+    });
+    this.translate.get('COMMONPROMPT.NAME').subscribe(t => {
+      a.name = t;
+    });
+    this.translate.get('COMMONPROMPT.SURNAME').subscribe(t => {
+      a.surname = t;
+    });
+    this.translate.get('COMMONPROMPT.AGE').subscribe(t => {
+      a.age = t;
+    });
+
+    let prompt = this.alertCtrl.create({
+      title: a.title,
+      message: a.message,
+      inputs: [
+        {
+          name: 'name',
+          placeholder: a.name+' : jon',
+        },
+        {
+          name: 'surname',
+          placeholder: a.surname + ' : jon',
+        },
+        {
+          name: 'age',
+          placeholder: a.age + ' : 222'
+        }
+      ],
+      buttons: [
+        {
+          text: a.dismiss,
+          handler: data => {
+            
+          }
+        },
+        {
+          text: a.send,
+          handler: data => {
+            this.getItems(data);
+            //console.log(data.surname);
+          }
+        }
+      ]
+    });
+    prompt.present();
+
+  }
 
   getItems(ev: any) {
     // Reset items back to all of the items
-    let query =this.tableStore.getTableS();
-    let val = ev.target.value;
-    if (val && val.trim() == '') return this.ping();
-    for (let i in query) {
-      
-      if (query[i].name.toLowerCase().indexOf(val.toLowerCase())>-1){
-        console.log("yes");
-      }
-      
-    }
-    // set val to the value of the searchbar
     
+    console.log(ev);
 
-    // if the value is an empty string don't filter the items
-    //if (val && val.trim() != '') {
-      //query = query.filter((item) => {
-       // return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-     // })
-    //}
-   // console.log(query);
+    if(!ev.name) delete ev.name;
+    if(!ev.surname) delete ev.surname;
+    if(!ev.age) delete ev.age;
+    
+    console.log(ev);
+    this.tableManagement.Filter(ev).subscribe(
+      (data : any) => {
+        this.tabletoshow = data;
+      }
+    )
   }
 
   // Add function, with prompt form
@@ -88,21 +141,20 @@ export class TablePage {
     this.translate.get('ADD.MESSAGE').subscribe(t => {
       a.message = t;
     });
-    this.translate.get('ADD.DISMISS').subscribe(t => {
+    this.translate.get('COMMONPROMPT.DISMISS').subscribe(t => {
       a.dismiss = t;
     });
-    this.translate.get('ADD.NAME').subscribe(t => {
+    this.translate.get('COMMONPROMPT.SEND').subscribe(t => {
+      a.send = t;
+    });
+    this.translate.get('COMMONPROMPT.NAME').subscribe(t => {
       a.name = t;
     });
-
-    this.translate.get('ADD.SURNAME').subscribe(t => {
+    this.translate.get('COMMONPROMPT.SURNAME').subscribe(t => {
       a.surname = t;
     });
-    this.translate.get('ADD.AGE').subscribe(t => {
+    this.translate.get('COMMONPROMPT.AGE').subscribe(t => {
       a.age = t;
-    });
-    this.translate.get('ADD.SEND').subscribe(t => {
-      a.send = t;
     });
 
     let prompt = this.alertCtrl.create({
@@ -110,16 +162,17 @@ export class TablePage {
       message: a.message,
       inputs: [
         {
-          name: a.name,
-          placeholder: 'name'
+          name: 'name',
+          placeholder: a.name+' : jon',
+         
         },
         {
-          name: a.surname,
-          placeholder: 'jon'
+          name: 'surname',
+          placeholder: a.surname + ' : jon',
         },
         {
-          name: a.age,
-          placeholder:'222'
+          name: 'age',
+          placeholder: a.age + ' : 222'
         }
       ],
       buttons: [
@@ -142,22 +195,22 @@ export class TablePage {
   }
   
 
+
   AddClicked(Addform:any){
 
-    let index = this.getindex();
-    
-         
+    // let index = this.getindex();
 
-    //console.log(Addform);
+
     let construct = {name:"", surname:"", age:1};
-    
-    if (Addform.name) construct.name=Addform.name;
+
+    if (Addform.name != null) construct.name=Addform.name;
     if (Addform.surname) construct.surname=Addform.surname;
     if (Addform.age) construct.age=Addform.age;
-    // console.log(construct);
     
-    this.tableManagement.NewItemM(construct).subscribe(
-      (data : any) => {
+  
+    
+  this.tableManagement.NewItemM(construct).subscribe(
+     (data : any) => {
         this.ping();
       }
     )
@@ -199,29 +252,28 @@ export class TablePage {
       index++;
       if ( !index ) return;
       index--;
+
       let a: any = {};
       this.translate.get('MODIFY.TITLE').subscribe(t => {
         a.title = t;
       });
-  
       this.translate.get('MODIFY.MESSAGE').subscribe(t => {
         a.message = t;
       });
-      this.translate.get('MODIFY.DISMISS').subscribe(t => {
+      this.translate.get('COMMONPROMPT.DISMISS').subscribe(t => {
         a.dismiss = t;
       });
-      this.translate.get('MODIFY.NAME').subscribe(t => {
+      this.translate.get('COMMONPROMPT.SEND').subscribe(t => {
+        a.send = t;
+      });
+      this.translate.get('COMMONPROMPT.NAME').subscribe(t => {
         a.name = t;
       });
-  
-      this.translate.get('MODIFY.SURNAME').subscribe(t => {
+      this.translate.get('COMMONPROMPT.SURNAME').subscribe(t => {
         a.surname = t;
       });
-      this.translate.get('MODIFY.AGE').subscribe(t => {
+      this.translate.get('COMMONPROMPT.AGE').subscribe(t => {
         a.age = t;
-      });
-      this.translate.get('MODIFY.SEND').subscribe(t => {
-        a.send = t;
       });
 
 
@@ -230,15 +282,15 @@ export class TablePage {
       message: a.message,
       inputs: [
         {
-          name: a.name,
+          name: 'name',
           placeholder: this.tabletoshow[index].name
         },
         {
-          name: a.surname,
+          name: 'surname',
           placeholder: this.tabletoshow[index].surname
         },
         {
-          name: a.age,
+          name: 'age',
           placeholder: this.tabletoshow[index].age
         }
       ],
@@ -267,7 +319,7 @@ export class TablePage {
     if( !index ) {
       return;
     }
-
+    console.log(fullitem);
     let constructingitem  = {name: 'a', surname: 'a' , age: 1 };
     if(fullitem.name) {constructingitem.name = fullitem.name } else { constructingitem.name = this.tabletoshow[index].name; }
     if(fullitem.surname) {constructingitem.surname = fullitem.surname } else { constructingitem.surname = this.tabletoshow[index].surname; }

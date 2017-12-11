@@ -7,7 +7,8 @@
       "Add": "Add",
       "Modify": "Modify",
       "Inspect": "Inspect",
-      "Delete": "Delete"
+      "Delete": "Delete",
+      "Filter":"Filter"
     },
     "header": {
       "title": "OASP4JS",
@@ -20,25 +21,25 @@
       "SUBTITLE":"Wrong User and/or password",
       "DISMISS":"Close"
     },
-    "ADD":{
-      "TITLE":"ADD form",
-      "MESSAGE":"Here you can add the new user",
+    "COMMONPROMPT":{
       "NAME": "Name",
       "SURNAME": "Surname",
       "AGE": "Age",
       "SEND": "Send",
       "DISMISS":"Close"
+    },
+    "ADD":{
+      "TITLE":"ADD form",
+      "MESSAGE":"Here you can add the new user"
     },
     "MODIFY":{
       "TITLE":"Modify form",
-      "MESSAGE":"Here you can modify the selected user",
-      "NAME": "Name",
-      "SURNAME": "Surname",
-      "AGE": "Age",
-      "SEND": "Send",
-      "DISMISS":"Close"
+      "MESSAGE":"Here you can modify the selected user"
     },
-
+    "FILTER":{
+      "TITLE":"Filter form",
+      "MESSAGE":"Search for something"
+    },
     "login": {
       "user": "Login",
       "username": "Username",

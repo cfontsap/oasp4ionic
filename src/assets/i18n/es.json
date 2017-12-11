@@ -7,7 +7,8 @@
       "Add": "Añadir",
       "Modify": "Modificar",
       "Inspect": "Inspeccionar",
-      "Delete": "Borrar"
+      "Delete": "Borrar",
+      "Filter":"Busqueda"
     },
     "header": {
       "title": "OASP4JS",
@@ -20,23 +21,24 @@
       "subtitle":"Usuario o contraseña erroneo",
       "dismiss":"cerrar"
     },
-    "ADD":{
-      "TITLE":"Añadir",
-      "MESSAGE":"Aqui puedes añadir nuevos usuarios",
+    "COMMONPROMPT":{
       "NAME": "Nombre",
       "SURNAME": "Apellido",
       "AGE": "Edad",
       "SEND": "Enviar",
       "DISMISS":"Cerrar"
     },
+    "ADD":{
+      "TITLE":"Añadir",
+      "MESSAGE":"Aqui puedes añadir nuevos usuarios"
+    },
     "MODIFY":{
       "TITLE":"Modificar",
-      "MESSAGE":"Aqui puedes modificar el usuario seleccionado",
-      "NAME": "Nombre",
-      "SURNAME": "Apellido",
-      "AGE": "Edad",
-      "SEND": "Enviar",
-      "DISMISS":"Cerrar"
+      "MESSAGE":"Aqui puedes modificar el usuario seleccionado"
+    },
+    "FILTER":{
+      "TITLE":"Buscar",
+      "MESSAGE":"Busca cosas"
     },
     "login": {
       "user": "Usuario",

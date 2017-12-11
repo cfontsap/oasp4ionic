@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { HTTP } from '@ionic-native/http';
-import { AuthServiceProvider } from '../security/auth-service'
 /*
   Generated class for the TablemanagementProvider provider.
 
@@ -35,13 +34,16 @@ export class TablemanagementProvider {
           return this.http.delete(this.BO.tableserv()+id, {});
   }
 
+  Filter(SinglePart : any){
+    console.log(SinglePart);
+    return this.http.post(this.BO.tableserv()+"search",SinglePart,{})
+  }
 
 
   ModifyItem(fullitem : any) : Observable<any> {
-      // console.log(fullitem);
+      
       //console.log(fullitem.id +" just before call");
-      return this.http.post(this.BO.tableserv()+"modify",fullitem, { });
-
+      return this.http.post(this.BO.tableserv(),fullitem, { });
   }
 
 }
