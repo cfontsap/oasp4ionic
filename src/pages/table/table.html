@@ -6,37 +6,8 @@
 -->
 <ion-header >
     <layoutheader></layoutheader>
-    <ion-grid>
-            <ion-row>
-                <ion-col>
-                        <button ion-button  icon-end  (click)="promptAddClicked()" >
-                            {{'buttons.Add'| translate}}
-                            <ion-icon name="exit"></ion-icon>
-                        </button>
-                </ion-col>
-                <ion-col>
-                        <button ion-button  icon-end  (click)="promptModifyClicked()" >
-                            {{'buttons.Modify'| translate}}
-                            <ion-icon name="exit"></ion-icon>
-                        </button>
-                </ion-col>
-                    
-                <ion-col>
-                        <button ion-button  icon-end  (click)="DeleteClicked()" >
-                            {{'buttons.Delete'| translate}}
-                            <ion-icon name="exit"></ion-icon>
-                        </button>
-                </ion-col>
-                <ion-col>
-                    <button ion-button  icon-end  (click)="promptFilterClicked()" >
-                        {{'buttons.Filter'| translate}}
-                        <ion-icon name="exit"></ion-icon>
-                    </button>
-            </ion-col>
-            </ion-row>
-
-        </ion-grid>
-  </ion-header>
+        <table-operations></table-operations>
+</ion-header>
 
 
 <ion-content padding>
@@ -50,10 +21,9 @@
           <ion-col>{{p.surname}}</ion-col>
           <ion-col>{{p.age}}</ion-col>
     </ion-row>
-
-    <ion-row>
-        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>  
   </ion-grid>
-
+  
 </ion-content>

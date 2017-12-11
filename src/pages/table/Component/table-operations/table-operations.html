@@ -1,0 +1,29 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+    <button ion-button  icon-end  (click)="promptAddClicked()" >
+      {{'buttons.Add'| translate}}
+      <ion-icon name="exit"></ion-icon>
+    </button>
+    </ion-col>
+    <ion-col>
+    <button ion-button  icon-end  (click)="promptModifyClicked()" >
+      {{'buttons.Modify'| translate}}
+      <ion-icon name="exit"></ion-icon>
+    </button>
+    </ion-col>
+
+    <ion-col>
+      <button ion-button  icon-end  (click)="DeleteClicked()" >
+      {{'buttons.Delete'| translate}}
+      <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button  icon-end  (click)="promptFilterClicked()" >
+      {{'buttons.Filter'| translate}}
+      <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

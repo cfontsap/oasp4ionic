@@ -1,4 +1,5 @@
 
+import {TableOperationsComponent} from '../pages/table/Component/table-operations/table-operations';
 import { HttpinterceptorProvider } from '../providers/security/httpinterceptor';
 import { AuthServiceProvider } from '../providers/security/auth-service';
 
@@ -46,6 +47,7 @@ export function translateFactory(http: HttpClient) {
     WelcomePage,
     HeaderComponent,
     TablePage,
+    TableOperationsComponent
   ],
   imports: [
     BrowserModule,

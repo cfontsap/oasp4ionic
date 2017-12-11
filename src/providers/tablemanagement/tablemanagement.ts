@@ -35,7 +35,6 @@ export class TablemanagementProvider {
   }
 
   Filter(SinglePart : any){
-    console.log(SinglePart);
     return this.http.post(this.BO.tableserv()+"search",SinglePart,{})
   }
 
