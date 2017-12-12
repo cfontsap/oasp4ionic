@@ -11,7 +11,6 @@ import { Injectable } from '@angular/core';
 export class TablestoreProvider {
 
   StoredTable : any = [{name:"a",surname:"a", age: 101, checkbox:false },{name:"b",surname:"b", age: 41, checkbox:false },{name:"c",surname:"c", age: 23, checkbox:false }];
-  length : number = 0;
   ExpendableTable: any = this.StoredTable;
 
   constructor(public http: HttpClient) {
@@ -26,20 +25,17 @@ export class TablestoreProvider {
   }
 
   setTableS(newTable : any){
-    //console.log(newTable);
-    let newStoredTable : {name: String, surname: String, age: number, checkbox: boolean};
+
     let CompleteTable : any[] = new Array();
-    let newlength: number = 0;
+
     for (let i in newTable){
-      // console.log(newTable[i]);
-      newStoredTable = {name:newTable[i].name, surname:newTable[i].surname, age:newTable[i].age, checkbox :false};
-      CompleteTable.push(newStoredTable);
-      newlength += 1
-      // console.log(CompleteTable);
+
+      CompleteTable.push({name:newTable[i].name, surname:newTable[i].surname, age:newTable[i].age, checkbox :false});
+
     }
     this.StoredTable = CompleteTable;
-    length = newlength;
-    // this.StoredTable = [{name:"b",surname:"b", id: 0 },{name:"a",surname:"a", id: 1 },{name:"cx",surname:"cx", id: 2 }];
+
+   
   }
 
 }

@@ -6,7 +6,6 @@
 -->
 <ion-header >
     <layoutheader></layoutheader>
-    <table-operations></table-operations>
 </ion-header>
 
 
@@ -23,7 +22,17 @@
     </ion-row>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>  
+  </ion-infinite-scroll>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>  
   </ion-grid>
+  <ion-fab  bottom left>
+    <button ion-fab color="blue"><ion-icon name="arrow-dropright"></ion-icon></button>
+    <ion-fab-list side="top">
+      <table-operations>
+        </table-operations>
+    </ion-fab-list>
+  </ion-fab>
   
 </ion-content>

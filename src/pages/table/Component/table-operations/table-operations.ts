@@ -106,6 +106,12 @@ export class TableOperationsComponent {
             this.checkbox = true;
             //console.log(data.surname);
           }
+        },
+        {
+          text: 'Clear Filter',
+          handler: data =>{
+            this.onclick
+          }
         }
       ]
     });
@@ -125,7 +131,7 @@ export class TableOperationsComponent {
         for(let i in data.result){
             data.result[i].checkbox = false;
         }
-        this.tableStore.setTableS = data.result;
+        this.tableStore.setTableS(data.result);
         this.tablemain.tabletoshow = data.result;
         this.checkbox = true;
         // console.log(this.checkbox);

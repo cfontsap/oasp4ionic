@@ -3,6 +3,7 @@ import { TablestoreProvider } from '../../providers/tablemanagement/tablestore';
 import { Component } from '@angular/core';
 import { AlertController, InfiniteScroll, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TablemanagementProvider } from '../../providers/tablemanagement/tablemanagement';
+import { HeaderManagementProvider } from '../../components/header/HeaderManagement/HeaderManagement';
 
 
 /**
@@ -27,7 +28,8 @@ export class TablePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public tableManagement: TablemanagementProvider, public tableStore: TablestoreProvider,
-    public alertCtrl: AlertController, public translate: TranslateService    
+    public alertCtrl: AlertController, public translate: TranslateService,
+    public headerManager : HeaderManagementProvider    
     ) {
     
   }
@@ -46,8 +48,22 @@ export class TablePage {
   }
 
   ping(){
-    
-    this.ionViewDidLoad();
+    console.log('tururu');
+    this.tableManagement.getTableM().subscribe( 
+      (data:any) =>{
+        console.log(data);
+        this.tableStore.setTableS(data.result);
+        this.tabletoshowbefore = this.tableStore.getTableS();
+        this.tabletoshow = [];
+        for(let i = 0; i<this.PAGINATIONTRESHOLD; i++){
+          if(this.tabletoshowbefore[i]) this.tabletoshow.push(this.tabletoshowbefore[i]);
+        }
+        this.indexforpagination = this.PAGINATIONTRESHOLD;
+
+      }, (err) => {
+        console.log(err);
+      }
+    )    
   }
 
 
@@ -61,7 +77,28 @@ export class TablePage {
   }
   
 
+  ionViewWillEnter() {
+        this.headerManager.setTitle("Table");
+        this.headerManager.EntryorExitTableview(true);
+        this.tableManagement.getTableM().subscribe( 
+          (data:any) =>{
+            this.tableStore.setTableS(data.result);
+            this.tabletoshowbefore = this.tableStore.getTableS();
+            for(let i = 0; i<this.PAGINATIONTRESHOLD; i++){
+              if(this.tabletoshowbefore[i]) this.tabletoshow.push(this.tabletoshowbefore[i]);
+            }
+            this.indexforpagination = this.PAGINATIONTRESHOLD;
+    
+          }, (err) => {
+            console.log(err);
+          }
+        )
+    
+      }
 
+  ionViewWillLeave(){
+    this.headerManager.EntryorExitTableview(false);
+  }
   doInfinite(infiniteScroll){
 
         setTimeout(() => {
@@ -77,22 +114,8 @@ export class TablePage {
 
 
   ionViewDidLoad() {
-    
+    this.headerManager.setTitle("Table");
     this.tabletoshow = [];
-    this.tableManagement.getTableM().subscribe( 
-      (data:any) =>{
-        this.tableStore.setTableS(data.result);
-        this.tabletoshowbefore = this.tableStore.getTableS();
-        for(let i = 0; i<this.PAGINATIONTRESHOLD; i++){
-          if(this.tabletoshowbefore[i]) this.tabletoshow.push(this.tabletoshowbefore[i]);
-        }
-        this.indexforpagination = this.PAGINATIONTRESHOLD;
-
-      }, (err) => {
-        console.log(err);
-      }
-
-    )
 
   }
 

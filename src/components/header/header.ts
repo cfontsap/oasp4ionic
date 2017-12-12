@@ -6,7 +6,8 @@ import { AuthServiceProvider } from '../../providers/security/auth-service';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, Input } from '@angular/core';
 import { LoginProvider } from '../../providers/login/loginProvider';
-
+import {TablestoreProvider} from '../../providers/tablemanagement/tablestore'
+import {HeaderManagementProvider} from './HeaderManagement/HeaderManagement'
 /**
  * Generated class for the HeaderComponent component.
  *
@@ -15,30 +16,32 @@ import { LoginProvider } from '../../providers/login/loginProvider';
  */
 @Component({
   selector: 'layoutheader',
-  templateUrl: 'header.html'
+  templateUrl: 'header.html',
 })
 export class HeaderComponent {
-  defaultTitle = "Wrong Title"
+  Title = ""
   _text: string;
   language = 'EN'
   pages:any;
+  table : boolean = false;
 
   @Input()
   set text(newTitle: string) {
       newTitle = newTitle.trim();
       if (newTitle.length === 0) {
-          newTitle = this.defaultTitle;
+          newTitle = this.Title;
       }
       this._text = newTitle;
   }
 
   get title() {
-      return this._text;
+      return this.Title;
   }
 
   
 
-  constructor(private translate: TranslateService,private navCtrl: NavController, private auth: AuthServiceProvider, public loginp : LoginProvider) {
+  constructor(private translate: TranslateService,private navCtrl: NavController, private auth: AuthServiceProvider,
+    public tableStore: TablestoreProvider ,public loginp : LoginProvider, public headerManager : HeaderManagementProvider) {
     //this._text = 'Hello World';
     this.pages = [
       
@@ -57,6 +60,18 @@ export class HeaderComponent {
 
   isauthenthicated(){
     return this.auth.getAuthenthicated();
+  }
+
+  inTableview(){
+    return this.headerManager.inTableview();
+  }
+
+  arrivedTable(){
+    this.table = true;
+  }
+
+  LeftTable(){
+    this.table = false;
   }
 
   logout(){

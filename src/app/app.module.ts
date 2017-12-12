@@ -28,6 +28,9 @@ import { HeaderComponent } from '../components/header/header';
 import { TablemanagementProvider } from '../providers/tablemanagement/tablemanagement';
 import { TablePage } from '../pages/table/table';
 import { TablestoreProvider } from '../providers/tablemanagement/tablestore';
+import { HeaderManagementProvider } from '../components/header/HeaderManagement/HeaderManagement';
+
+
 
 
 //import { HttpRequestInterceptorProvider } from '../providers/shared/http-request-interceptor';
@@ -83,6 +86,8 @@ export function translateFactory(http: HttpClient) {
       multi: true},
     TablemanagementProvider,
     TablestoreProvider,
+    HeaderManagementProvider,
+
 
         
   ]
