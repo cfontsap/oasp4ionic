@@ -114,7 +114,7 @@ export class SampleOperationsComponent {
         {
           text: 'Clear Filter',
           handler: data =>{
-            this.isDisabled = false;
+            this.isDisabled = true;
             this.SamplePage.ping();
           }
         }
@@ -139,6 +139,7 @@ export class SampleOperationsComponent {
         this.tableStore.setTableS(data.result);
         this.SamplePage.tabletoshow = data.result;
         this.checkbox = true;
+        this.isDisabled = true;
         // console.log(this.checkbox);
       }
     )

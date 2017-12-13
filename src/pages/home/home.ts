@@ -1,4 +1,3 @@
-import { LoginPage } from '../Login/Login'
 import { AuthServiceProvider } from '../../providers/security/auth-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';

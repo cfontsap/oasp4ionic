@@ -1,4 +1,4 @@
-import { LanguagePage } from '../pages/language/language';
+
 import { HomePage } from '../pages/home/home';
 import { AuthServiceProvider } from '../providers/security/auth-service';
 import { Component, ViewChild } from '@angular/core';
@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/Login/Login';
 import { SamplePage } from '../pages/sample/sample'
-import { HeaderComponent } from '../components/header/header';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +28,7 @@ export class MyApp {
       
       this.pages = [
         { title: 'Home', component: HomePage},
-        { title :'Table', component: SamplePage},
+        { title :'Sample', component: SamplePage},
       ];
     });
   }

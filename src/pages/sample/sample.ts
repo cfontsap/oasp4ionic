@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { TablestoreProvider } from '../../providers/tablemanagement/tablestore';
 import { Component} from '@angular/core';
-import { AlertController, InfiniteScroll, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TablemanagementProvider } from '../../providers/tablemanagement/tablemanagement';
 import { HeaderManagementProvider } from '../../components/header/HeaderManagement/HeaderManagement';
 

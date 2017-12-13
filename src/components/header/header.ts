@@ -1,5 +1,4 @@
-import { SamplePage } from '../../pages/sample/sample';
-import { HomePage } from '../../pages/home/home';
+
 import { LoginPage } from '../../pages/Login/Login'
 import { NavController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/security/auth-service';
@@ -7,8 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Component, Input } from '@angular/core';
 import { LoginProvider } from '../../providers/login/loginProvider';
 import {TablestoreProvider} from '../../providers/tablemanagement/tablestore'
-import {HeaderManagementProvider} from './HeaderManagement/HeaderManagement'
-import { MyApp } from '../../app/app.component';
+
 
 /**
  * Generated class for the HeaderComponent component.
@@ -37,7 +35,7 @@ export class HeaderComponent {
   }
   
   constructor(private translate: TranslateService,private navCtrl: NavController, private auth: AuthServiceProvider,
-    public tableStore: TablestoreProvider ,public loginp : LoginProvider, public headerManager : HeaderManagementProvider) {
+    public tableStore: TablestoreProvider ,public loginp : LoginProvider) {
     //this.Title = this.headerManager.getTitle();
   }
 
