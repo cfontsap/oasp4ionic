@@ -1,5 +1,5 @@
 import { LanguagePage } from '../pages/language/language';
-import {TableOperationsComponent} from '../pages/table/Component/table-operations/table-operations';
+import {SampleOperationsComponent} from '../pages/sample/Component/sample-operations/sample-operations';
 import { HttpinterceptorProvider } from '../providers/security/httpinterceptor';
 import { AuthServiceProvider } from '../providers/security/auth-service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
@@ -18,7 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HeaderComponent } from '../components/header/header';
 import { TablemanagementProvider } from '../providers/tablemanagement/tablemanagement';
-import { TablePage } from '../pages/table/table';
+import { SamplePage } from '../pages/sample/sample';
 import { TablestoreProvider } from '../providers/tablemanagement/tablestore';
 import { HeaderManagementProvider } from '../components/header/HeaderManagement/HeaderManagement';
 import { HomePage } from '../pages/home/home';
@@ -42,9 +42,9 @@ export function translateFactory(http: HttpClient) {
     HomePage,
     LoginPage,
     HeaderComponent,
-    TablePage,
+    SamplePage,
     LanguagePage,
-    TableOperationsComponent
+    SampleOperationsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +63,7 @@ export function translateFactory(http: HttpClient) {
     MyApp,
     HomePage,
     LoginPage,
-    TablePage,
+    SamplePage,
     LanguagePage
   ],
   providers: [

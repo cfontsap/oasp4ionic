@@ -1,4 +1,4 @@
-import { TablePage } from '../../table';
+import { SamplePage } from '../../sample';
 import { AlertController } from 'ionic-angular';
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,10 +12,10 @@ import { TablemanagementProvider } from '../../../../providers/tablemanagement/t
  * Components.
  */
 @Component({
-  selector: 'table-operations',
-  templateUrl: 'table-operations.html'
+  selector: 'sample-operations',
+  templateUrl: 'sample-operations.html'
 })
-export class TableOperationsComponent {
+export class SampleOperationsComponent {
 
   text: string;
   
@@ -24,18 +24,11 @@ export class TableOperationsComponent {
   @Input() isDisabled : boolean = true;
 
   constructor(public translate: TranslateService, public alertCtrl: AlertController, public tableManagement: TablemanagementProvider,
-    public tableStore: TablestoreProvider, public tablemain: TablePage) {
+    public tableStore: TablestoreProvider, public SamplePage: SamplePage) {
     this.text = 'Hello World';
 
   }
   constructingitem = {id: '', name: '', surname: '', age: '' };
-  indexisnull() : boolean {
-    let index = this.tablemain.getindex();
-    if (!index && index != 0) {
-      return true;
-    }
-    return false;
-  }
   checkbox : boolean = false;
 
   onclick(){
@@ -48,7 +41,7 @@ export class TableOperationsComponent {
         for (let i in data.result){
           data.result[i].checkbox = false;
         }
-        this.tablemain.tabletoshow = data.result;
+        this.SamplePage.tabletoshow = data.result;
       }
       )
     } else {
@@ -112,6 +105,7 @@ export class TableOperationsComponent {
         {
           text: a.send,
           handler: data => {
+            this.isDisabled = false;
             this.getItems(data);
             this.checkbox = true;
             //console.log(data.surname);
@@ -120,7 +114,8 @@ export class TableOperationsComponent {
         {
           text: 'Clear Filter',
           handler: data =>{
-            this.tablemain.ping();
+            this.isDisabled = false;
+            this.SamplePage.ping();
           }
         }
       ]
@@ -142,7 +137,7 @@ export class TableOperationsComponent {
             data.result[i].checkbox = false;
         }
         this.tableStore.setTableS(data.result);
-        this.tablemain.tabletoshow = data.result;
+        this.SamplePage.tabletoshow = data.result;
         this.checkbox = true;
         // console.log(this.checkbox);
       }
@@ -152,6 +147,10 @@ export class TableOperationsComponent {
   promptAddClicked() {
 
     let a = this.prompTranslations("ADD");
+    let index = this.SamplePage.getindex();
+    if (!index && index != 0) {
+      return;
+    }
 
     let prompt = this.alertCtrl.create({
       title: a.title,
@@ -206,7 +205,7 @@ export class TableOperationsComponent {
 
     this.tableManagement.NewItemM(construct).subscribe(
       (data: any) => {
-        this.tablemain.ping();
+        this.SamplePage.ping();
       }
     )
   }
@@ -221,8 +220,8 @@ export class TableOperationsComponent {
   DeleteClicked() {
 
     this.UpdateTable()
-    let index = this.tablemain.getindex();
-    if (!index) {
+    let index = this.SamplePage.getindex();
+    if (!index && index != 0) {
       return;
     }
     let search = { name: this.tabletoshow[index].name, surname: this.tabletoshow[index].surname, age: this.tabletoshow[index].age }
@@ -230,7 +229,7 @@ export class TableOperationsComponent {
       (Idresponse: any) => {
         this.tableManagement.DeleteItem(Idresponse.result[0].id).subscribe(
           (deleteresponse) => {
-            this.tablemain.ping();
+            this.SamplePage.ping();
           }
         )
       }
@@ -241,7 +240,7 @@ export class TableOperationsComponent {
   doConfirm(){
     
     // console.log(a);
-    if(this.tablemain.getindex() == null) return;
+    if(this.SamplePage.getindex() == null) return;
     let a: any = {};
     this.translate.get('DELETE'+'.TITLE').subscribe(t => {
       a.title = t;
@@ -271,6 +270,7 @@ export class TableOperationsComponent {
         {
           text: a.Confirm,
           handler: data => {
+            this.isDisabled=true;
             this.DeleteClicked();
             //console.log(data.surname);
           }
@@ -282,7 +282,7 @@ export class TableOperationsComponent {
 
   promptModifyClicked() {
     this.UpdateTable()
-    let index = this.tablemain.getindex();
+    let index = this.SamplePage.getindex();
 
     index++;
     if (!index) return;
@@ -318,7 +318,6 @@ export class TableOperationsComponent {
         {
           text: a.send,
           handler: data => {
-            console.log(data);
             this.ModifyClicked(data);
             
           }
@@ -332,7 +331,7 @@ export class TableOperationsComponent {
     // now i need this to check if there are no changes because constructing item has a new field id the original table doesn't have
     let checknochanges = 0;
 
-    let index = this.tablemain.getindex();
+    let index = this.SamplePage.getindex();
     if (!index && index != 0) {
       return;
     }
@@ -352,7 +351,7 @@ export class TableOperationsComponent {
         this.tableManagement.ModifyItem(Itemconstructed).subscribe(
           (Modifyresponse: any) => {
             console.log(Modifyresponse)
-            this.tablemain.ping();
+            this.SamplePage.ping();
           }
         )
       }

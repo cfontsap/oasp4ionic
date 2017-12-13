@@ -1,4 +1,4 @@
-import { TablePage } from '../../pages/table/table';
+import { SamplePage } from '../../pages/sample/sample';
 import { HomePage } from '../../pages/home/home';
 import { LoginPage } from '../../pages/Login/Login'
 import { NavController } from 'ionic-angular';

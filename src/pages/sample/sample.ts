@@ -16,9 +16,9 @@ import { HeaderManagementProvider } from '../../components/header/HeaderManageme
 @IonicPage()
 @Component({
   selector: 'page-table',
-  templateUrl: 'table.html',
+  templateUrl: 'sample.html',
 })
-export class TablePage {
+export class SamplePage {
 
   isDisabledC : boolean = true;
   tabletoshowbefore :  [{name: string,surname:string, age: number, checkbox:boolean }];
