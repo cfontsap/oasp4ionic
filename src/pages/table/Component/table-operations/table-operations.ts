@@ -329,7 +329,7 @@ export class TableOperationsComponent {
   }
 
   ModifyClicked(fullitem: any) {
-    // now i need this to check if there are no changes since constructing item has a new field id the original table doesn't have
+    // now i need this to check if there are no changes because constructing item has a new field id the original table doesn't have
     let checknochanges = 0;
 
     let index = this.tablemain.getindex();
