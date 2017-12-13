@@ -1,3 +1,4 @@
+import { LanguagePage } from '../pages/language/language';
 
 import {TableOperationsComponent} from '../pages/table/Component/table-operations/table-operations';
 import { HttpinterceptorProvider } from '../providers/security/httpinterceptor';
@@ -50,6 +51,7 @@ export function translateFactory(http: HttpClient) {
     WelcomePage,
     HeaderComponent,
     TablePage,
+    LanguagePage,
     TableOperationsComponent
   ],
   imports: [
@@ -70,6 +72,7 @@ export function translateFactory(http: HttpClient) {
     HomePage,
     WelcomePage,
     TablePage,
+    LanguagePage
   ],
   providers: [
 

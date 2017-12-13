@@ -15,7 +15,7 @@ export class HeaderManagementProvider {
 
   // a var for each page?
   table : boolean = false;
-  Title : string = "";
+  Title : string = "a";
 
 
   constructor(public http: HttpClient) {

@@ -1,3 +1,4 @@
+import { HeaderComponent } from '../../components/header/header';
 
 import { WelcomePage } from '../welcome/welcome';
 import { Component } from '@angular/core';
@@ -11,13 +12,13 @@ import { AlertController } from 'ionic-angular';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [TranslateService],
 })
 export class HomePage {
 
   user : {username: string , password: string };
   alermessages: any = {};
-  constructor( public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthServiceProvider , public translate: TranslateService, public loginp : LoginProvider ) {
+  constructor( public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthServiceProvider , 
+    public translate: TranslateService, public loginp : LoginProvider ) {
     this.user = {username : 'waiter' ,password : 'waiter'};
     translate.setDefaultLang('en');
   }
@@ -72,9 +73,5 @@ export class HomePage {
         });
     });
 }
-
-    
- 
-
     
   }

@@ -1,3 +1,4 @@
+import { LanguagePage } from '../pages/language/language';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { AuthServiceProvider } from '../providers/security/auth-service';
 import { Component, ViewChild } from '@angular/core';
@@ -6,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { TablePage } from '../pages/table/table';
+import { HeaderComponent } from '../components/header/header';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,7 +29,8 @@ export class MyApp {
       this.pages = [
         { title: 'Home', component:  HomePage},
         { title: 'Welcome', component: WelcomePage},
-        { title : 'Table', component: TablePage}
+        { title :'Table', component: TablePage},
+        { title: 'Language', component: LanguagePage}
       ];
     });
   }
@@ -36,6 +39,7 @@ export class MyApp {
     return this.auth.getAuthenthicated();
   }
   openPage(p){
+    //this.nav.push(p.component);
     this.nav.setRoot(p.component);
   }
 }

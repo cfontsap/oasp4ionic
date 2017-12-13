@@ -8,7 +8,8 @@
       "Modify": "Modify",
       "Inspect": "Inspect",
       "Delete": "Delete",
-      "Filter":"Filter"
+      "Filter":"Filter",
+      "Language":"Language"
     },
     "header": {
       "title": "OASP4JS",
@@ -53,6 +54,7 @@
       "errorMsg": "Wrong username or password"
     },
     "example":"example",
-    "Home":"home",
+    "Home":"Home",
     "Welcome":"Welcome"
+    
   }

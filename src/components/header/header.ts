@@ -8,6 +8,8 @@ import { Component, Input } from '@angular/core';
 import { LoginProvider } from '../../providers/login/loginProvider';
 import {TablestoreProvider} from '../../providers/tablemanagement/tablestore'
 import {HeaderManagementProvider} from './HeaderManagement/HeaderManagement'
+import { MyApp } from '../../app/app.component';
+
 /**
  * Generated class for the HeaderComponent component.
  *
@@ -17,13 +19,13 @@ import {HeaderManagementProvider} from './HeaderManagement/HeaderManagement'
 @Component({
   selector: 'layoutheader',
   templateUrl: 'header.html',
+  
 })
 export class HeaderComponent {
-  Title = ""
+  @Input() Title : string;
   _text: string;
   language = 'EN'
-  pages:any;
-  table : boolean = false;
+  pages : any;
 
   @Input()
   set text(newTitle: string) {
@@ -33,45 +35,21 @@ export class HeaderComponent {
       }
       this._text = newTitle;
   }
-
-  get title() {
-      return this.Title;
-  }
-
   
-
   constructor(private translate: TranslateService,private navCtrl: NavController, private auth: AuthServiceProvider,
     public tableStore: TablestoreProvider ,public loginp : LoginProvider, public headerManager : HeaderManagementProvider) {
-    //this._text = 'Hello World';
-    this.pages = [
-      
-      { title: 'Welcome', component: WelcomePage},
-      { title: 'Home', component:  HomePage},
-      { title: 'Table', component: TablePage}
-    ];
+    //this.Title = this.headerManager.getTitle();
   }
 
 
   togglelanguage(lang: string){
-    
+    console.log('tururu');
     this.translate.use(lang);
     this.language = lang;
   }
 
   isauthenthicated(){
     return this.auth.getAuthenthicated();
-  }
-
-  inTableview(){
-    return this.headerManager.inTableview();
-  }
-
-  arrivedTable(){
-    this.table = true;
-  }
-
-  LeftTable(){
-    this.table = false;
   }
 
   logout(){
@@ -85,4 +63,6 @@ export class HeaderComponent {
     }
     return false;
   }
+
+  
 }
