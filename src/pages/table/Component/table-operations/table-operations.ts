@@ -1,6 +1,6 @@
 import { TablePage } from '../../table';
 import { AlertController } from 'ionic-angular';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TablestoreProvider } from '../../../../providers/tablemanagement/tablestore';
 import { TablemanagementProvider } from '../../../../providers/tablemanagement/tablemanagement';
@@ -17,16 +17,26 @@ import { TablemanagementProvider } from '../../../../providers/tablemanagement/t
 })
 export class TableOperationsComponent {
   alerCtrl: any;
-
   text: string;
   tabletoshow: any;
+  @Input() isDisabled : boolean = true;
+
   
 
   constructor(public translate: TranslateService, public alertCtrl: AlertController, public tableManagement: TablemanagementProvider,
     public tableStore: TablestoreProvider, public tablemain: TablePage) {
     this.text = 'Hello World';
+
   }
 
+
+  indexisnull() : boolean {
+    let index = this.tablemain.getindex();
+    if (!index && index != 0) {
+      return true;
+    }
+    return false;
+  }
   checkbox : boolean = false;
   onclick(){
 

@@ -1,6 +1,6 @@
 import { TablePage } from '../../pages/table/table';
 import { HomePage } from '../../pages/home/home';
-import { WelcomePage } from '../../pages/welcome/welcome'
+import { LoginPage } from '../../pages/Login/Login'
 import { NavController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/security/auth-service';
 import { TranslateService } from '@ngx-translate/core';
@@ -43,7 +43,6 @@ export class HeaderComponent {
 
 
   togglelanguage(lang: string){
-    console.log('tururu');
     this.translate.use(lang);
     this.language = lang;
   }
@@ -55,7 +54,7 @@ export class HeaderComponent {
   logout(){
     this.loginp.IonicAngularLogout();
     // console.log(this.auth.getToken());
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(LoginPage);
   }
   currentlanguage(lang: String){
     if( lang == this.language ) {

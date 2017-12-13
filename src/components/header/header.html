@@ -5,7 +5,7 @@
 
                   <ion-title>{{Title}}</ion-title>
 
-                  <button ion-button  menuToggle="left">
+                  <button ion-button  menuToggle="left" *ngIf="isauthenthicated()">
                     <ion-icon name="menu"></ion-icon>    
                   </button>
 

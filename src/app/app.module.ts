@@ -1,25 +1,16 @@
 import { LanguagePage } from '../pages/language/language';
-
 import {TableOperationsComponent} from '../pages/table/Component/table-operations/table-operations';
 import { HttpinterceptorProvider } from '../providers/security/httpinterceptor';
 import { AuthServiceProvider } from '../providers/security/auth-service';
-
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 // import { LoginComponent } from '../components/login/login.component';
-
-
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
-import { WelcomePage } from '../pages/welcome/welcome';
-
-
-
-import { HomePage } from '../pages/home/home';
-
+import { LoginPage } from '../pages/Login/Login';
 import { LoginProvider } from '../providers/login/loginProvider';
 import { BussinessOperatorProvider } from '../providers/shared/bussiness-operator';
 import { TranslateLoader } from '@ngx-translate/core';
@@ -30,6 +21,7 @@ import { TablemanagementProvider } from '../providers/tablemanagement/tablemanag
 import { TablePage } from '../pages/table/table';
 import { TablestoreProvider } from '../providers/tablemanagement/tablestore';
 import { HeaderManagementProvider } from '../components/header/HeaderManagement/HeaderManagement';
+import { HomePage } from '../pages/home/home';
 
 
 
@@ -48,7 +40,7 @@ export function translateFactory(http: HttpClient) {
   declarations: [
     MyApp,
     HomePage,
-    WelcomePage,
+    LoginPage,
     HeaderComponent,
     TablePage,
     LanguagePage,
@@ -70,7 +62,7 @@ export function translateFactory(http: HttpClient) {
   entryComponents: [
     MyApp,
     HomePage,
-    WelcomePage,
+    LoginPage,
     TablePage,
     LanguagePage
   ],

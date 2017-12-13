@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/security/auth-service';
 import { HomePage } from '../../pages/home/home';
-import { WelcomePage } from '../../pages/welcome/welcome'
+import { LoginPage } from '../../pages/Login/Login'
 
 /**
  * Generated class for the LanguagePage page.
@@ -31,9 +31,9 @@ export class LanguagePage {
 
     this.translate.use(lang);
     if(this.auth.getAuthenthicated()){
-      this.navCtrl.setRoot(WelcomePage);
-    } else {
       this.navCtrl.setRoot(HomePage);
+    } else {
+      this.navCtrl.setRoot(LoginPage);
     }
 
 
