@@ -1,10 +1,9 @@
 import { TranslateService } from '@ngx-translate/core';
 import { TablestoreProvider } from '../../providers/tablemanagement/tablestore';
-import { Component, Input, Output } from '@angular/core';
+import { Component} from '@angular/core';
 import { AlertController, InfiniteScroll, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TablemanagementProvider } from '../../providers/tablemanagement/tablemanagement';
 import { HeaderManagementProvider } from '../../components/header/HeaderManagement/HeaderManagement';
-import { TableOperationsComponent } from './Component/table-operations/table-operations';
 
 
 /**
@@ -59,10 +58,10 @@ export class TablePage {
   }
 
   ping(){
-    console.log('tururu');
+
     this.tableManagement.getTableM().subscribe( 
       (data:any) =>{
-        console.log(data);
+
         this.tableStore.setTableS(data.result);
         this.tabletoshowbefore = this.tableStore.getTableS();
         this.tabletoshow = [];

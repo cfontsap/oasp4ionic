@@ -16,20 +16,19 @@ import { TablemanagementProvider } from '../../../../providers/tablemanagement/t
   templateUrl: 'table-operations.html'
 })
 export class TableOperationsComponent {
-  alerCtrl: any;
+
   text: string;
+  
+  alerCtrl: any;
   tabletoshow: any;
   @Input() isDisabled : boolean = true;
-
-  
 
   constructor(public translate: TranslateService, public alertCtrl: AlertController, public tableManagement: TablemanagementProvider,
     public tableStore: TablestoreProvider, public tablemain: TablePage) {
     this.text = 'Hello World';
 
   }
-
-
+  constructingitem = {id: '', name: '', surname: '', age: '' };
   indexisnull() : boolean {
     let index = this.tablemain.getindex();
     if (!index && index != 0) {
@@ -38,6 +37,7 @@ export class TableOperationsComponent {
     return false;
   }
   checkbox : boolean = false;
+
   onclick(){
 
   
@@ -120,7 +120,7 @@ export class TableOperationsComponent {
         {
           text: 'Clear Filter',
           handler: data =>{
-            this.onclick
+            this.tablemain.ping();
           }
         }
       ]
@@ -318,8 +318,9 @@ export class TableOperationsComponent {
         {
           text: a.send,
           handler: data => {
+            console.log(data);
             this.ModifyClicked(data);
-            //console.log(data.surname);
+            
           }
         }
       ]
@@ -330,24 +331,26 @@ export class TableOperationsComponent {
   ModifyClicked(fullitem: any) {
 
     let index = this.tablemain.getindex();
-    if (!index) {
+    if (!index && index != 0) {
       return;
     }
-    console.log(fullitem);
-    let constructingitem = { name: 'a', surname: 'a', age: 1 };
-    if (fullitem.name) { constructingitem.name = fullitem.name } else { constructingitem.name = this.tabletoshow[index].name; }
-    if (fullitem.surname) { constructingitem.surname = fullitem.surname } else { constructingitem.surname = this.tabletoshow[index].surname; }
-    if (fullitem.age) { constructingitem.age = fullitem.age } else { constructingitem.age = this.tabletoshow[index].age; }
+    
+    if (fullitem.name) { this.constructingitem.name = fullitem.name } else { this.constructingitem.name = this.tabletoshow[index].name; }
+    if (fullitem.surname) { this.constructingitem.surname = fullitem.surname } else { this.constructingitem.surname = this.tabletoshow[index].surname; }
+    if (fullitem.age) { this.constructingitem.age = fullitem.age } else { this.constructingitem.age = this.tabletoshow[index].age; }
     if (fullitem.equals == this.tabletoshow[index]) return;
 
     let truename = { name: this.tabletoshow[index].name }
 
     this.tableManagement.getItemId(truename).subscribe(
       (Idresponse: any) => {
-        let Itemconstructed = { name: constructingitem.name, surname: constructingitem.surname, age: constructingitem.age, id: Idresponse.result[0].id + "" };
-        // console.log(Itemconstructed);
+        console.log(Idresponse);
+        let Itemconstructed =this.constructingitem;
+        Itemconstructed.id = Idresponse.result[0].id;
+
         this.tableManagement.ModifyItem(Itemconstructed).subscribe(
           (Modifyresponse: any) => {
+            console.log(Modifyresponse)
             this.tablemain.ping();
           }
         )
