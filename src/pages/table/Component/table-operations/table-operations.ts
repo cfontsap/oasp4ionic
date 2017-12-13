@@ -339,8 +339,6 @@ export class TableOperationsComponent {
     if (fullitem.name) { this.constructingitem.name = fullitem.name;  } else { this.constructingitem.name = this.tabletoshow[index].name; checknochanges++ }
     if (fullitem.surname) { this.constructingitem.surname = fullitem.surname } else { this.constructingitem.surname = this.tabletoshow[index].surname; checknochanges++}
     if (fullitem.age) { this.constructingitem.age = fullitem.age } else { this.constructingitem.age = this.tabletoshow[index].age; checknochanges++}
-    let tempitem = this.tabletoshow[index];
-    delete tempitem.checkbox;
     if (checknochanges > 2) return;
 
     let truename = { name: this.tabletoshow[index].name }
