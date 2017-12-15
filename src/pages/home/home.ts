@@ -1,4 +1,3 @@
-import { AuthServiceProvider } from '../../providers/security/auth-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -17,17 +16,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class HomePage {
   name = "Welcome"
 
-  constructor(public navCtrl: NavController, public auth: AuthServiceProvider, public navParams: NavParams) {
-    
-    // this should go in the header
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
 
-  isauthenthicated(){
-    return this.auth.getAuthenthicated();
-  }
-
-  back(){
-    this.navCtrl.setRoot(HomePage);
   }
 
 }

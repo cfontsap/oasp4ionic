@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 
 
 import { HeaderComponent } from './header/header';
-import { HeaderManagementProvider } from './header/HeaderManagement/HeaderManagement';
+
 
 
 @NgModule({
 	declarations: [
     HeaderComponent,
     ],
-	imports: [HeaderManagementProvider],
+	imports: [],
 	exports: [
     HeaderComponent,
     ]

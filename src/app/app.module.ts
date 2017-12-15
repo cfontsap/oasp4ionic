@@ -3,7 +3,6 @@ import {SampleOperationsComponent} from '../pages/sample/Component/sample-operat
 import { HttpinterceptorProvider } from '../providers/security/httpinterceptor';
 import { AuthServiceProvider } from '../providers/security/auth-service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-// import { LoginComponent } from '../components/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -19,8 +18,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HeaderComponent } from '../components/header/header';
 import { TablemanagementProvider } from '../providers/tablemanagement/tablemanagement';
 import { SamplePage } from '../pages/sample/sample';
-import { TablestoreProvider } from '../providers/tablemanagement/tablestore';
-import { HeaderManagementProvider } from '../components/header/HeaderManagement/HeaderManagement';
 import { HomePage } from '../pages/home/home';
 
 
@@ -80,11 +77,7 @@ export function translateFactory(http: HttpClient) {
       useClass: HttpinterceptorProvider,
       multi: true},
     TablemanagementProvider,
-    TablestoreProvider,
-    HeaderManagementProvider,
-
-
-        
+     
   ]
 })
 export class AppModule {}

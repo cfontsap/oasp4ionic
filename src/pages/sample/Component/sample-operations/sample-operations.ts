@@ -2,7 +2,6 @@ import { SamplePage } from '../../sample';
 import { AlertController } from 'ionic-angular';
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { TablestoreProvider } from '../../../../providers/tablemanagement/tablestore';
 import { TablemanagementProvider } from '../../../../providers/tablemanagement/tablemanagement';
 
 /**
@@ -17,39 +16,17 @@ import { TablemanagementProvider } from '../../../../providers/tablemanagement/t
 })
 export class SampleOperationsComponent {
 
-  text: string;
-  
   alerCtrl: any;
   tabletoshow: any;
+  constructingitem = {id: '', name: '', surname: '', age: '' };
   @Input() isDisabled : boolean = true;
 
-  constructor(public translate: TranslateService, public alertCtrl: AlertController, public tableManagement: TablemanagementProvider,
-    public tableStore: TablestoreProvider, public SamplePage: SamplePage) {
-    this.text = 'Hello World';
+  constructor(public translate: TranslateService, public alertCtrl: AlertController, 
+    public tableManagement: TablemanagementProvider, public SamplePage: SamplePage) {
 
   }
-  constructingitem = {id: '', name: '', surname: '', age: '' };
-  checkbox : boolean = false;
-
-  onclick(){
-
   
-    if(this.checkbox == true) {
-      this.checkbox = false;
-      this.tableManagement.getTableM().subscribe(
-      (data: any) => {
-        for (let i in data.result){
-          data.result[i].checkbox = false;
-        }
-        this.SamplePage.tabletoshow = data.result;
-      }
-      )
-    } else {
-      this.checkbox = false;
-    }
-    
-  }
-  prompTranslations(Code:string) : any {
+  prompCommonTranslations(Code:string) : any {
     let a: any = {};
     this.translate.get(Code+'.TITLE').subscribe(t => {
       a.title = t;
@@ -77,7 +54,7 @@ export class SampleOperationsComponent {
 
   promptFilterClicked() {
     
-    let a = this.prompTranslations("FILTER");
+    let a = this.prompCommonTranslations("FILTER");
     let prompt = this.alertCtrl.create({
       title: a.title,
       message: a.message,
@@ -105,17 +82,22 @@ export class SampleOperationsComponent {
         {
           text: a.send,
           handler: data => {
+
+            if(!data.name) delete data.name;
+            if(!data.surname) delete data.surname;
+            if(!data.age) delete data.age;
+            if(!data) return;
             this.isDisabled = false;
-            this.getItems(data);
-            this.checkbox = true;
-            //console.log(data.surname);
+            this.SearchgetItems(data);
+
           }
         },
         {
           text: 'Clear Filter',
           handler: data =>{
+            
             this.isDisabled = true;
-            this.SamplePage.ping();
+            this.SamplePage.reloadSamplePageTable();
           }
         }
       ]
@@ -124,35 +106,24 @@ export class SampleOperationsComponent {
 
   }
 
-  getItems(ev: any) {
-
-    if (!ev.name) delete ev.name;
-    if (!ev.surname) delete ev.surname;
-    if (!ev.age) delete ev.age;
+  SearchgetItems(ev: any) {
 
     this.tableManagement.Filter(ev).subscribe(
       (data: any) => {
 
         for(let i in data.result){
-            data.result[i].checkbox = false;
+            data.result[i].checkbox = false; //answer has no checkbox value, so by default we put it to false
         }
-        this.tableStore.setTableS(data.result);
-        this.SamplePage.tabletoshow = data.result;
-        this.checkbox = true;
+        this.SamplePage.Lastoperation = data.result;
         this.isDisabled = true;
-        // console.log(this.checkbox);
+        // console.log(this.SamplePage.Lastoperation);
+        this.SamplePage.reloadSamplePageAfterSearch();
       }
     )
   }
   //Add Operation
   promptAddClicked() {
-
-    let a = this.prompTranslations("ADD");
-    let index = this.SamplePage.getindex();
-    if (!index && index != 0) {
-      return;
-    }
-
+    let a = this.prompCommonTranslations("ADD");    
     let prompt = this.alertCtrl.create({
       title: a.title,
       message: a.message,
@@ -206,7 +177,7 @@ export class SampleOperationsComponent {
 
     this.tableManagement.NewItemM(construct).subscribe(
       (data: any) => {
-        this.SamplePage.ping();
+        this.SamplePage.reloadSamplePageTable();
       }
     )
   }
@@ -214,23 +185,24 @@ export class SampleOperationsComponent {
 
   // UpdateTable for delete and modify
   UpdateTable() {
-    this.tabletoshow = this.tableStore.getTableS();
+    this.tabletoshow = this.SamplePage.tabletoshow;
   }
 
   // deletes the selected element
   DeleteClicked() {
 
-    this.UpdateTable()
-    let index = this.SamplePage.getindex();
+    let index = this.SamplePage.getindex(); // i get the index of the item to delete in the table we have in the view
     if (!index && index != 0) {
       return;
     }
-    let search = { name: this.tabletoshow[index].name, surname: this.tabletoshow[index].surname, age: this.tabletoshow[index].age }
+  
+    let search = {name: this.SamplePage.tabletoshow[index].name}
+
     this.tableManagement.getItemId(search).subscribe(
       (Idresponse: any) => {
         this.tableManagement.DeleteItem(Idresponse.result[0].id).subscribe(
           (deleteresponse) => {
-            this.SamplePage.ping();
+            this.SamplePage.reloadSamplePageTable();
           }
         )
       }
@@ -289,7 +261,7 @@ export class SampleOperationsComponent {
     if (!index) return;
     index--;
 
-    let a = this.prompTranslations("MODIFY");
+    let a = this.prompCommonTranslations("MODIFY");
     // console.log(a);
 
     let prompt = this.alertCtrl.create({
@@ -352,7 +324,7 @@ export class SampleOperationsComponent {
         this.tableManagement.ModifyItem(Itemconstructed).subscribe(
           (Modifyresponse: any) => {
             console.log(Modifyresponse)
-            this.SamplePage.ping();
+            this.SamplePage.reloadSamplePageTable();
           }
         )
       }

@@ -1,11 +1,8 @@
-
-import { LoginPage } from '../../pages/Login/Login'
 import { NavController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/security/auth-service';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, Input } from '@angular/core';
-import { LoginProvider } from '../../providers/login/loginProvider';
-import {TablestoreProvider} from '../../providers/tablemanagement/tablestore'
+import { LoginPage } from '../../pages/Login/Login';
 
 
 /**
@@ -16,51 +13,38 @@ import {TablestoreProvider} from '../../providers/tablemanagement/tablestore'
  */
 @Component({
   selector: 'layoutheader',
-  templateUrl: 'header.html',
-  
+  templateUrl: 'header.html'
 })
 export class HeaderComponent {
+
+  currentlanguage: string;
+  langs = ['en','es'];
   @Input() Title : string;
-  _text: string;
-  language = 'EN'
-  pages : any;
 
-  @Input()
-  set text(newTitle: string) {
-      newTitle = newTitle.trim();
-      if (newTitle.length === 0) {
-          newTitle = this.Title;
-      }
-      this._text = newTitle;
-  }
-  
-  constructor(private translate: TranslateService,private navCtrl: NavController, private auth: AuthServiceProvider,
-    public tableStore: TablestoreProvider ,public loginp : LoginProvider) {
-    //this.Title = this.headerManager.getTitle();
+  constructor(private translate: TranslateService,private navCtrl: NavController, private auth: AuthServiceProvider) {
+    translate.setDefaultLang('en');
+    this.currentlanguage = 'en'; // 'en by default'
   }
 
-
-  togglelanguage(lang: string){
-    this.translate.use(lang);
-    this.language = lang;
-  }
-
-  isauthenthicated(){
+  isauthenthicated() : boolean{
     return this.auth.getAuthenthicated();
   }
 
-  logout(){
-    //this.loginp.IonicAngularLogout();
-    this.auth.setToken("");
-    this.auth.setAuthenthicated(false);
-    this.navCtrl.setRoot(LoginPage);
-  }
-  currentlanguage(lang: String){
-    if( lang == this.language ) {
-      return true;
-    }
-    return false;
+  Showlanguage(lang:string) : boolean { //decides if a button should be shown
+    if(lang == this.currentlanguage) return false;
+    return true;
   }
 
-  
+  togglelanguage(lang: string) : void{ 
+    this.translate.use(lang);
+    this.currentlanguage = lang;
+  }
+
+  logout() : void{
+    //ionic uses a jwt token for security, we don't need to connect to the server since we don't have a season, erasing the jwt is enough.
+    this.auth.setAuthenthicated(false);
+    this.auth.setToken("");
+    this.navCtrl.setRoot(LoginPage);
+  }
+
 }
