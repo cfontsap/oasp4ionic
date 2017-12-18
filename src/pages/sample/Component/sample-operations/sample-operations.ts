@@ -16,86 +16,97 @@ import { TablemanagementProvider } from '../../../../providers/tablemanagement/t
 })
 export class SampleOperationsComponent {
 
+
+  inputs = [
+    { name: "name", placeholder: this.getTranslationOutsideAlerts("ionBasic.Sample.name")},
+    { name: 'surname', placeholder: this.getTranslation("ionBasic.Sample.surname")},
+    { name: 'age', placeholder: this.getTranslation("ionBasic.Sample.age")}
+  ];
+  
+  ionicbuttonstranslation : any = this.getTranslation("ionBasic.Sample.commonbuttons");
+
+  searchTerms: any = {
+    name: null,
+    surname: null,
+    age: null,
+  };
+
   alerCtrl: any;
   tabletoshow: any;
-  constructingitem = {id: '', name: '', surname: '', age: '' };
-  @Input() isDisabled : boolean = true;
+  constructingitem = { id: '', name: '', surname: '', age: '' };
 
-  constructor(public translate: TranslateService, public alertCtrl: AlertController, 
+  @Input() isDisabled: boolean = true;
+
+  constructor(public translate: TranslateService, public alertCtrl: AlertController,
     public tableManagement: TablemanagementProvider, public SamplePage: SamplePage) {
-
   }
-  
-  prompCommonTranslations(Code:string) : any {
-    let a: any = {};
-    this.translate.get(Code+'.TITLE').subscribe(t => {
-      a.title = t;
+
+
+  getTranslation(text: string): string {
+
+    let value: string;
+    this.translate.get(text).subscribe((res: string) => {
+      value = res;
     });
-    this.translate.get(Code+'.MESSAGE').subscribe(t => {
-      a.message = t;
+    
+    return value;
+  }
+
+  getTranslationOutsideAlerts(text: string){
+
+    let value: string;
+    this.translate.get(text).subscribe((res: string) => {
+      value = res;
     });
-    this.translate.get('COMMONPROMPT.DISMISS').subscribe(t => {
-      a.dismiss = t;
+
+    this.translate.onLangChange.subscribe(() => {
+      for(let i in this.inputs){
+        this.translate.get("ionBasic.Sample."+this.inputs[i].name).subscribe((res: string) => {
+          this.inputs[i].placeholder = res;
+        });
+      }
     });
-    this.translate.get('COMMONPROMPT.SEND').subscribe(t => {
-      a.send = t;
-    });
-    this.translate.get('COMMONPROMPT.NAME').subscribe(t => {
-      a.name = t;
-    });
-    this.translate.get('COMMONPROMPT.SURNAME').subscribe(t => {
-      a.surname = t;
-    });
-    this.translate.get('COMMONPROMPT.AGE').subscribe(t => {
-      a.age = t;
-    });
-    return a;
+
+    this.translate.onLangChange.subscribe(
+      () => {
+        this.translate.get("ionBasic.Sample.commonbuttons").subscribe(
+          (data) => {
+            this.ionicbuttonstranslation = data;
+          }
+        )
+      }
+    )
+    return value;
   }
 
   promptFilterClicked() {
-    
-    let a = this.prompCommonTranslations("FILTER");
+  
+    let a :any ;
+    let FilterTranslations : any = this.getTranslation("ionBasic.Sample.operations.filter");
     let prompt = this.alertCtrl.create({
-      title: a.title,
-      message: a.message,
-      inputs: [
-        {
-          name: 'name',
-          placeholder: a.name + ' : jon',
-        },
-        {
-          name: 'surname',
-          placeholder: a.surname + ' : jon',
-        },
-        {
-          name: 'age',
-          placeholder: a.age + ' : 222'
-        }
-      ],
+      title: FilterTranslations.title,
+      message: FilterTranslations.message,
+      inputs: this.inputs,
       buttons: [
         {
-          text: a.dismiss,
-          handler: data => {
-
-          }
-        },
-        {
-          text: a.send,
-          handler: data => {
-
-            if(!data.name) delete data.name;
-            if(!data.surname) delete data.surname;
-            if(!data.age) delete data.age;
-            if(!data) return;
+          text: this.ionicbuttonstranslation.send,
+          handler: (data) => {
+            a = data
+            for(let value in data){
+              if(data[value]=="") delete data[value];
+            }
             this.isDisabled = false;
-            this.SearchgetItems(data);
-
+            this.SearchgetItems(a);
           }
         },
         {
-          text: 'Clear Filter',
-          handler: data =>{
-            
+          text: this.ionicbuttonstranslation.dismiss,
+          handler: data => {
+          }
+        },
+        {
+          text: FilterTranslations.clear,
+          handler: data => {
             this.isDisabled = true;
             this.SamplePage.reloadSamplePageTable();
           }
@@ -103,58 +114,41 @@ export class SampleOperationsComponent {
       ]
     });
     prompt.present();
-
   }
 
   SearchgetItems(ev: any) {
 
     this.tableManagement.Filter(ev).subscribe(
       (data: any) => {
-
-        for(let i in data.result){
-            data.result[i].checkbox = false; //answer has no checkbox value, so by default we put it to false
+        if(!data.result) return;
+        for (let i in data.result) {
+          data.result[i].checkbox = false; //answer has no checkbox value, so by default we put it to false
         }
         this.SamplePage.Lastoperation = data.result;
         this.isDisabled = true;
-        // console.log(this.SamplePage.Lastoperation);
         this.SamplePage.reloadSamplePageAfterSearch();
       }
     )
   }
   //Add Operation
   promptAddClicked() {
-    let a = this.prompCommonTranslations("ADD");    
+    let Addtranslations : any = this.getTranslation("ionBasic.Sample.operations.add");
+    
     let prompt = this.alertCtrl.create({
-      title: a.title,
-      message: a.message,
-      inputs: [
-        {
-          name: 'name',
-          placeholder: a.name + ' : jon',
-
-        },
-        {
-          name: 'surname',
-          placeholder: a.surname + ' : jon',
-        },
-        {
-          name: 'age',
-          placeholder: a.age + ' : 222'
-        }
-      ],
+      title: Addtranslations.title,
+      message: Addtranslations.message,
+      inputs: this.inputs,
       buttons: [
         {
-          text: a.dismiss,
+          text: this.ionicbuttonstranslation.dismiss,
           handler: data => {
-
           }
         },
         {
-          text: a.send,
+          text: this.ionicbuttonstranslation.send,
           handler: data => {
             this.AddClicked(data);
-            
-            //console.log(data.surname);
+
           }
         }
       ]
@@ -163,41 +157,22 @@ export class SampleOperationsComponent {
   }
 
   AddClicked(Addform: any) {
-
-    // let index = this.getindex();
-
-
-    let construct = { name: "", surname: "", age: 1 };
-
-    if (Addform.name != null) construct.name = Addform.name;
-    if (Addform.surname) construct.surname = Addform.surname;
-    if (Addform.age) construct.age = Addform.age;
-
-
-
-    this.tableManagement.NewItemM(construct).subscribe(
+    this.tableManagement.NewItemM(Addform).subscribe(
       (data: any) => {
+        console.log(data);
         this.SamplePage.reloadSamplePageTable();
       }
     )
   }
 
 
-  // UpdateTable for delete and modify
-  UpdateTable() {
-    this.tabletoshow = this.SamplePage.tabletoshow;
-  }
-
   // deletes the selected element
   DeleteClicked() {
-
     let index = this.SamplePage.getindex(); // i get the index of the item to delete in the table we have in the view
     if (!index && index != 0) {
       return;
     }
-  
-    let search = {name: this.SamplePage.tabletoshow[index].name}
-
+    let search = { name: this.SamplePage.tabletoshow[index].name }
     this.tableManagement.getItemId(search).subscribe(
       (Idresponse: any) => {
         this.tableManagement.DeleteItem(Idresponse.result[0].id).subscribe(
@@ -210,42 +185,25 @@ export class SampleOperationsComponent {
   }
 
 
-  doConfirm(){
-    
-    // console.log(a);
-    if(this.SamplePage.getindex() == null) return;
-    let a: any = {};
-    this.translate.get('DELETE'+'.TITLE').subscribe(t => {
-      a.title = t;
-    });
-    this.translate.get('DELETE'+'.MESSAGE').subscribe(t => {
-      a.message = t;
-    });
-    this.translate.get('DELETE.DISMISS').subscribe(t => 
-    {
-      a.dismiss = t;
-    });
-    this.translate.get('DELETE.CONFIRM').subscribe(t => 
-    {
-      a.Confirm = t;
-    });
+  doConfirm() {
 
+    if (this.SamplePage.getindex() == null) return;
+    let DeleteTranslations : any = {};
+    DeleteTranslations = this.getTranslation('ionBasic.Sample.operations.delete');
     let prompt = this.alertCtrl.create({
-      title: a.title,
-      message: a.message,
+      title: DeleteTranslations.title,
+      message: DeleteTranslations.message,
       buttons: [
         {
-          text: a.dismiss,
+          text: DeleteTranslations.dismiss,
           handler: data => {
-            // console.log(a);
           }
         },
         {
-          text: a.Confirm,
+          text: DeleteTranslations.confirm,
           handler: data => {
-            this.isDisabled=true;
+            this.isDisabled = true;
             this.DeleteClicked();
-            //console.log(data.surname);
           }
         }
       ]
@@ -254,45 +212,31 @@ export class SampleOperationsComponent {
   }
 
   promptModifyClicked() {
-    this.UpdateTable()
+    
+    this.tabletoshow = this.SamplePage.tabletoshow;
     let index = this.SamplePage.getindex();
+    if (!index && index != 0) {
+      return;
+    }
 
-    index++;
-    if (!index) return;
-    index--;
-
-    let a = this.prompCommonTranslations("MODIFY");
-    // console.log(a);
+    let modifytrans : any = this.getTranslation("ionBasic.Sample.operations.modify");
 
     let prompt = this.alertCtrl.create({
-      title: a.title,
-      message: a.message,
-      inputs: [
-        {
-          name: 'name',
-          placeholder: this.tabletoshow[index].name
-        },
-        {
-          name: 'surname',
-          placeholder: this.tabletoshow[index].surname
-        },
-        {
-          name: 'age',
-          placeholder: this.tabletoshow[index].age
-        }
-      ],
+      title: modifytrans.title ,
+      message: modifytrans.message,
+      inputs: this.inputs,
       buttons: [
         {
-          text: a.dismiss,
+          text: this.ionicbuttonstranslation.dismiss,
           handler: data => {
             // console.log(a);
           }
         },
         {
-          text: a.send,
+          text: this.ionicbuttonstranslation.send,
           handler: data => {
             this.ModifyClicked(data);
-            
+
           }
         }
       ]
@@ -303,27 +247,30 @@ export class SampleOperationsComponent {
   ModifyClicked(fullitem: any) {
     // now i need this to check if there are no changes because constructing item has a new field id the original table doesn't have
     let checknochanges = 0;
-
     let index = this.SamplePage.getindex();
     if (!index && index != 0) {
       return;
     }
-    if (fullitem.name) { this.constructingitem.name = fullitem.name;  } else { this.constructingitem.name = this.tabletoshow[index].name; checknochanges++ }
-    if (fullitem.surname) { this.constructingitem.surname = fullitem.surname } else { this.constructingitem.surname = this.tabletoshow[index].surname; checknochanges++}
-    if (fullitem.age) { this.constructingitem.age = fullitem.age } else { this.constructingitem.age = this.tabletoshow[index].age; checknochanges++}
+    let originalitem = this.tabletoshow[index];
+    for(let i in fullitem){
+      if(fullitem[i] != "" && fullitem[i] != null) {
+        this.constructingitem[i] = fullitem[i];           
+      } else{
+        this.constructingitem[i]= originalitem[i];
+        checknochanges++;
+        }
+    }
     if (checknochanges > 2) return;
 
     let truename = { name: this.tabletoshow[index].name }
 
     this.tableManagement.getItemId(truename).subscribe(
       (Idresponse: any) => {
-        console.log(Idresponse);
-        let Itemconstructed =this.constructingitem;
+        let Itemconstructed = this.constructingitem;
         Itemconstructed.id = Idresponse.result[0].id;
 
         this.tableManagement.ModifyItem(Itemconstructed).subscribe(
           (Modifyresponse: any) => {
-            console.log(Modifyresponse)
             this.SamplePage.reloadSamplePageTable();
           }
         )

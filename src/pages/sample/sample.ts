@@ -30,7 +30,7 @@ export class SamplePage {
     public tableManagement: TablemanagementProvider,
     public alertCtrl: AlertController, public translate: TranslateService
   ) {
-
+    this.translate.setDefaultLang('en');
   }
 
   NoMorethanOneCheckbox(p: any) {
@@ -72,7 +72,11 @@ export class SamplePage {
 
   reloadSamplePageAfterSearch(){
     this.tabletoshow=[];
-    for (let i=0; i<this.FIRSTPAGINATIONTHRESHOLD; i++){
+    console.log(this.Lastoperation)
+    if(this.Lastoperation.length == 0) return;
+    let searchres = this.Lastoperation.length;
+    if(this.FIRSTPAGINATIONTHRESHOLD < searchres) searchres = this.FIRSTPAGINATIONTHRESHOLD
+    for (let i=0; i<searchres; i++){
       this.tabletoshow.push(this.Lastoperation[i])
       }
     this.InfiniteScrollingIndex = this.FIRSTPAGINATIONTHRESHOLD;

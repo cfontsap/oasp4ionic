@@ -1,61 +1,77 @@
 {
-    "buttons": {
-      "login": "Conectarse",
-      "logout": "Desconectarse",
-      "menu": "Menu",
-      "back": "Atras",
-      "Add": "Añadir",
-      "Modify": "Modificar",
-      "Inspect": "Inspeccionar",
-      "Delete": "Borrar",
-      "Filter":"Busqueda",
-      "Language":"Idioma"
-    },
-    "header": {
-      "title": "OASP4JS",
-      "error": "LOGIN ERROR",
-      "EN": "English",
-      "ES": "Spanish"
-    },
-    "alert":{
-      "title":"Error",
-      "subtitle":"Usuario o contraseña erroneo",
-      "dismiss":"cerrar"
-    },
-    "COMMONPROMPT":{
-      "NAME": "Nombre",
-      "SURNAME": "Apellido",
-      "AGE": "Edad",
-      "SEND": "Enviar",
-      "DISMISS":"Cerrar"
-    },
-    "ADD":{
-      "TITLE":"Añadir",
-      "MESSAGE":"Aqui puedes añadir nuevos usuarios"
-    },
-    "MODIFY":{
-      "TITLE":"Modificar",
-      "MESSAGE":"Aqui puedes modificar el usuario seleccionado"
-    },
-    "FILTER":{
-      "TITLE":"Buscar",
-      "MESSAGE":"Busca cosas"
-    },
-    "DELETE":{
-      "TITLE":"Confirmación de borrado",
-      "MESSAGE":"Quieres borrar el elemento seleccionado?",
-      "DISMISS":"No, cancelar",
-      "CONFIRM":"SI"
-    },
-    "login": {
-      "user": "Usuario",
-      "username": "Username",
-      "password": "Contraseña",
-      "errorMsg": "Usuario o contraseña erroneos"
-    },
-    "example":"ejemplo",
-    "Home":"Principal",
-    "Welcome":"Welcome",
-    "Language":"Language",
-    "p":"wea"
-  }
+  "buttons": {
+    "login": "Conectarse",
+    "logout": "Desconectarse",
+    "menu": "Menu",
+    "back": "Atras",
+    "Add": "Añadir",
+    "Modify": "Modificar",
+    "Inspect": "Inspeccionar",
+    "Delete": "Borrar",
+    "Filter": "Busqueda",
+    "Language": "Idioma"
+  },
+  "header": {
+    "title": "OASP4JS",
+    "error": "LOGIN ERROR",
+    "EN": "English",
+    "ES": "Spanish"
+  },
+  "alert": {
+    "title": "Error",
+    "subtitle": "Usuario o contraseña erroneo",
+    "dismiss": "cerrar"
+  },
+  "COMMONPROMPT": {
+    "NAME": "Nombre",
+    "SURNAME": "Apellido",
+    "AGE": "Edad",
+    "SEND": "Enviar",
+    "DISMISS": "Cerrar"
+  },
+  "ionBasic": {
+    "title": "ionBasic Título",
+    "description": "Esta es la plantilla básica de ionic",
+    "Sample": {
+      "name": "Nombre",
+      "surname": "Apellidos",
+      "age": "Edad",
+      "commonbuttons": {
+        "send": "Enviar",
+        "dismiss": "Cerrar"
+      },
+      "operations": {
+        "filter": {
+          "title": "Formulario de busqueda",
+          "message": "Utiliza este formulario para buscar algo",
+          "clear": "Limpiar busqueda"
+        },
+        "add": {
+          "title": "Formulario para añadir nuevos items",
+          "message": "Aqui puedes añadir el nuevo item"
+        },
+        "modify": {
+          "title": "Formulario para modificar items",
+          "message": "Aqui puedes modificar el item seleccionado"
+        },
+        "delete": {
+          "title": "Alerta confirmación de borrado",
+          "message": "Quieres borrar el item seleccionado?",
+          "dismiss": "No, cancela",
+          "confirm": "Si"
+        }
+      }
+    }
+  },
+  "login": {
+    "user": "Usuario",
+    "username": "Username",
+    "password": "Contraseña",
+    "errorMsg": "Usuario o contraseña erroneos"
+  },
+  "example": "ejemplo",
+  "Home": "Principal",
+  "Welcome": "Welcome",
+  "Language": "Language",
+  "p": "wea"
+}
