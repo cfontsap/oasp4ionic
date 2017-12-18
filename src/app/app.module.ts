@@ -19,7 +19,7 @@ import { HeaderComponent } from '../components/header/header';
 import { TablemanagementProvider } from '../providers/tablemanagement/tablemanagement';
 import { SamplePage } from '../pages/sample/sample';
 import { HomePage } from '../pages/home/home';
-
+import {SampledialogComponent} from '../pages/sample/Component/sampledialog/sampledialog';
 
 
 
@@ -41,7 +41,8 @@ export function translateFactory(http: HttpClient) {
     HeaderComponent,
     SamplePage,
     LanguagePage,
-    SampleOperationsComponent
+    SampleOperationsComponent,
+    SampledialogComponent
   ],
   imports: [
     BrowserModule,

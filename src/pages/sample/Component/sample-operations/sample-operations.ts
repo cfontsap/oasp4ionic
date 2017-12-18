@@ -58,24 +58,14 @@ export class SampleOperationsComponent {
     this.translate.get(text).subscribe((res: string) => {
       value = res;
     });
-
-    this.translate.onLangChange.subscribe(() => {
+    this.translate.onLangChange.subscribe(
+      () => {
       for(let i in this.inputs){
         this.translate.get("ionBasic.Sample."+this.inputs[i].name).subscribe((res: string) => {
           this.inputs[i].placeholder = res;
         });
       }
     });
-
-    this.translate.onLangChange.subscribe(
-      () => {
-        this.translate.get("ionBasic.Sample.commonbuttons").subscribe(
-          (data) => {
-            this.ionicbuttonstranslation = data;
-          }
-        )
-      }
-    )
     return value;
   }
 
@@ -167,7 +157,7 @@ export class SampleOperationsComponent {
 
 
   // deletes the selected element
-  DeleteClicked() {
+  DeleteConfirmed() {
     let index = this.SamplePage.getindex(); // i get the index of the item to delete in the table we have in the view
     if (!index && index != 0) {
       return;
@@ -185,7 +175,7 @@ export class SampleOperationsComponent {
   }
 
 
-  doConfirm() {
+  DeleteConfirmForm() {
 
     if (this.SamplePage.getindex() == null) return;
     let DeleteTranslations : any = {};
@@ -203,7 +193,7 @@ export class SampleOperationsComponent {
           text: DeleteTranslations.confirm,
           handler: data => {
             this.isDisabled = true;
-            this.DeleteClicked();
+            this.DeleteConfirmed();
           }
         }
       ]
@@ -224,7 +214,11 @@ export class SampleOperationsComponent {
     let prompt = this.alertCtrl.create({
       title: modifytrans.title ,
       message: modifytrans.message,
-      inputs: this.inputs,
+      inputs: [ 
+        { name: "name", placeholder: this.tabletoshow[index].name},
+        { name: 'surname', placeholder: this.tabletoshow[index].surname},
+        { name: 'age', placeholder: this.tabletoshow[index].age}
+      ],
       buttons: [
         {
           text: this.ionicbuttonstranslation.dismiss,
@@ -236,7 +230,6 @@ export class SampleOperationsComponent {
           text: this.ionicbuttonstranslation.send,
           handler: data => {
             this.ModifyClicked(data);
-
           }
         }
       ]

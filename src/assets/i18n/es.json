@@ -22,13 +22,6 @@
     "subtitle": "Usuario o contraseña erroneo",
     "dismiss": "cerrar"
   },
-  "COMMONPROMPT": {
-    "NAME": "Nombre",
-    "SURNAME": "Apellido",
-    "AGE": "Edad",
-    "SEND": "Enviar",
-    "DISMISS": "Cerrar"
-  },
   "ionBasic": {
     "title": "ionBasic Título",
     "description": "Esta es la plantilla básica de ionic",
