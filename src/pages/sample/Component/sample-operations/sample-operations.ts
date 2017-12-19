@@ -1,8 +1,9 @@
 import { SamplePage } from '../../sample';
-import { AlertController } from 'ionic-angular';
+import { AlertController, ModalController } from 'ionic-angular';
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TablemanagementProvider } from '../../../../providers/tablemanagement/tablemanagement';
+import {SampleoperationsdialogComponent} from '../sample-operations-dialog/sample-operations-dialog'
 
 /**
  * Generated class for the TableOperationsComponent component.
@@ -38,7 +39,8 @@ export class SampleOperationsComponent {
   @Input() isDisabled: boolean = true;
 
   constructor(public translate: TranslateService, public alertCtrl: AlertController,
-    public tableManagement: TablemanagementProvider, public SamplePage: SamplePage) {
+    public tableManagement: TablemanagementProvider, public SamplePage: SamplePage, 
+    public modalCtrl: ModalController) {
   }
 
 
@@ -72,38 +74,10 @@ export class SampleOperationsComponent {
   promptFilterClicked() {
   
     let a :any ;
-    let FilterTranslations : any = this.getTranslation("ionBasic.Sample.operations.filter");
-    let prompt = this.alertCtrl.create({
-      title: FilterTranslations.title,
-      message: FilterTranslations.message,
-      inputs: this.inputs,
-      buttons: [
-        {
-          text: this.ionicbuttonstranslation.send,
-          handler: (data) => {
-            a = data
-            for(let value in data){
-              if(data[value]=="") delete data[value];
-            }
-            this.isDisabled = false;
-            this.SearchgetItems(a);
-          }
-        },
-        {
-          text: this.ionicbuttonstranslation.dismiss,
-          handler: data => {
-          }
-        },
-        {
-          text: FilterTranslations.clear,
-          handler: data => {
-            this.isDisabled = true;
-            this.SamplePage.reloadSamplePageTable();
-          }
-        }
-      ]
-    });
-    prompt.present();
+
+    let modal = this.modalCtrl.create(SampleoperationsdialogComponent, {dialog:"filter", edit:null});
+    modal.present();
+
   }
 
   SearchgetItems(ev: any) {
@@ -122,6 +96,10 @@ export class SampleOperationsComponent {
   }
   //Add Operation
   promptAddClicked() {
+
+    let modal = this.modalCtrl.create(SampleoperationsdialogComponent, {dialog:"add",edit:null});
+    modal.present();
+    /*
     let Addtranslations : any = this.getTranslation("ionBasic.Sample.operations.add");
     
     let prompt = this.alertCtrl.create({
@@ -143,7 +121,7 @@ export class SampleOperationsComponent {
         }
       ]
     });
-    prompt.present();
+    prompt.present(); */
   }
 
   AddClicked(Addform: any) {
@@ -209,32 +187,9 @@ export class SampleOperationsComponent {
       return;
     }
 
-    let modifytrans : any = this.getTranslation("ionBasic.Sample.operations.modify");
+    let modal = this.modalCtrl.create(SampleoperationsdialogComponent, {dialog:"modify", edit:this.tabletoshow[index]});
+    modal.present();
 
-    let prompt = this.alertCtrl.create({
-      title: modifytrans.title ,
-      message: modifytrans.message,
-      inputs: [ 
-        { name: "name", placeholder: this.tabletoshow[index].name},
-        { name: 'surname', placeholder: this.tabletoshow[index].surname},
-        { name: 'age', placeholder: this.tabletoshow[index].age}
-      ],
-      buttons: [
-        {
-          text: this.ionicbuttonstranslation.dismiss,
-          handler: data => {
-            // console.log(a);
-          }
-        },
-        {
-          text: this.ionicbuttonstranslation.send,
-          handler: data => {
-            this.ModifyClicked(data);
-          }
-        }
-      ]
-    });
-    prompt.present();
   }
 
   ModifyClicked(fullitem: any) {

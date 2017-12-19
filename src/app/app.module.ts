@@ -19,7 +19,7 @@ import { HeaderComponent } from '../components/header/header';
 import { TablemanagementProvider } from '../providers/tablemanagement/tablemanagement';
 import { SamplePage } from '../pages/sample/sample';
 import { HomePage } from '../pages/home/home';
-import {SampledialogComponent} from '../pages/sample/Component/sampledialog/sampledialog';
+import { SampleoperationsdialogComponent } from '../pages/sample/Component/sample-operations-dialog/sample-operations-dialog'
 
 
 
@@ -42,7 +42,7 @@ export function translateFactory(http: HttpClient) {
     SamplePage,
     LanguagePage,
     SampleOperationsComponent,
-    SampledialogComponent
+    SampleoperationsdialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +62,8 @@ export function translateFactory(http: HttpClient) {
     HomePage,
     LoginPage,
     SamplePage,
-    LanguagePage
+    LanguagePage,
+    SampleoperationsdialogComponent
   ],
   providers: [
 
