@@ -50,20 +50,19 @@ export class LoginPage {
   }
   
   togglelanguage(lang: string){
-    // console.log(lang + " arrived");
+    
     this.translate.use(lang);
   }
 
   logForm(){
-    // console.log(username + "login component");
+    
     this.loginp.login({username: this.user.username, password: this.user.password})
       .subscribe((res: any) => {
         
             this.auth.setToken(res.headers.get('Authorization'));
             this.auth.setAuthenthicated(true);
             this.navCtrl.setRoot(HomePage);
-            // console.log(this.auth.getToken());
-            // this.router.navigate(['/home']);
+
 
     }, (err: any) => {
         this.auth.setAuthenthicated(false);

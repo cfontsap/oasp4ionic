@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TablemanagementProvider } from '../../providers/tablemanagement/tablemanagement';
 import { TablestoreProvider } from '../../providers/tablestore/tablestore';
+import { LoadingController } from 'ionic-angular';
 
 
 
@@ -29,10 +30,10 @@ export class SamplePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public tableManagement: TablemanagementProvider, public store: TablestoreProvider,
-    public alertCtrl: AlertController, public translate: TranslateService
+    public alertCtrl: AlertController, public translate: TranslateService,
+    public loadingCtrl: LoadingController
   ) {
-    this.translate.setDefaultLang('en');
-    
+    this.translate.setDefaultLang('en'); 
   }
 
   NoMorethanOneCheckbox(p: any) {
@@ -43,7 +44,6 @@ export class SamplePage {
         this.tabletoshow[p].checkbox = !this.tabletoshow[p].checkbox;
         if (this.tabletoshow[p].checkbox) {
           this.Delete_and_Modified_Buttons_Disabled = false;
-          //console.log(this.isDisabled);
         }
         else {
           this.Delete_and_Modified_Buttons_Disabled = true;
@@ -52,42 +52,29 @@ export class SamplePage {
     }
   }
 
-  reloadSamplePageTable() {
-
-    
-    this.tableManagement.getTableM().subscribe(
-      (data: any) => {
-        this.store.setNoSearch(data.result);
-        this.Lastoperation = this.store.getNoSearch();
-        this.tabletoshow = [];
-        for (let i = 0; i < this.FIRSTPAGINATIONTHRESHOLD; i++) {
-          if (this.Lastoperation[i]) {
-          this.tabletoshow.push(this.Lastoperation[i]);
-          this.tabletoshow[i].checkbox = false;
-          }
-        }
-        this.InfiniteScrollingIndex = this.FIRSTPAGINATIONTHRESHOLD;
-
-      }, (err) => {
-        console.log(err);
-      }
-    )
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 1000
+    });
+    loader.present();
   }
 
-  reloadSamplePageAfterSearch(){
+  reloadSamplePageTable() {
 
-    this.tabletoshow=[];
-    this.Lastoperation = this.store.getSearch();
-
-    if(this.Lastoperation.length == 0) return;
-    let searchres = this.Lastoperation.length;
-    if(this.FIRSTPAGINATIONTHRESHOLD < searchres) searchres = this.FIRSTPAGINATIONTHRESHOLD
-    for (let i=0; i<searchres; i++){
-      this.tabletoshow.push(this.Lastoperation[i])
+    this.Lastoperation = this.store.getTable();
+    this.Delete_and_Modified_Buttons_Disabled = true;
+    this.tabletoshow = [];
+    for (let i = 0; i < this.FIRSTPAGINATIONTHRESHOLD; i++) {
+      if (this.Lastoperation[i]) {
+      this.tabletoshow.push(this.Lastoperation[i]);
+      this.tabletoshow[i].checkbox = false;
       }
-    this.InfiniteScrollingIndex = this.FIRSTPAGINATIONTHRESHOLD;
+      
     }
-
+    
+    this.InfiniteScrollingIndex = this.FIRSTPAGINATIONTHRESHOLD;
+  }
 
   public getindex() {
     for (let i = 0; i < this.tabletoshow.length; i++) {
@@ -98,14 +85,13 @@ export class SamplePage {
     return null;
   }
 
-
   ionViewWillEnter() {
-
+    this.presentLoading();
     this.tableManagement.getTableM().subscribe(
       (data: any) => {
-        this.store.setNoSearch(data.result);
-        this.store.setSearch(data.result);
-        this.Lastoperation = this.store.getNoSearch();
+        
+        this.store.setTable(data.result);
+        this.Lastoperation = this.store.getTable();
         for (let i = 0; i < this.FIRSTPAGINATIONTHRESHOLD; i++) {
           if (this.Lastoperation[i]) {
             

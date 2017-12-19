@@ -1,11 +1,11 @@
 <!-- Generated template for the SampledialogComponent component -->
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary" >
     <ion-title align=center>
       {{translations.title}}
     
     </ion-title>
-    <div style="font-size: 16px">{{translations.message}}</div>
+    
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span ion-text color="primary" showWhen="ios">Cancel</span>
@@ -16,7 +16,11 @@
 </ion-header>
 
 <ion-content >
-  <form   >
+  
+      <div align=center style="font-size: 16px" padding >{{translations.message}}</div>
+  
+    
+  <form>
     <ion-item>
       <ion-label>{{'ionBasic.Sample.name'| translate}}</ion-label>
       <ion-input type="text" [(ngModel)]="user.name" name="name"></ion-input>
@@ -35,7 +39,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-grid>
+  <ion-grid >
     <ion-row>
       <ion-col>
         <button ion-button (click)="dismiss()" block>
@@ -43,10 +47,10 @@
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button [hidden]=!disables.filter (click)="AddorModify()" block>
+        <button ion-button [hidden]=!disables.filter (click)="AddorModify()" full>
           {{'ionBasic.Sample.commonbuttons.send' | translate}}
         </button>
-        <button ion-button [hidden]=disables.filter (click)="Search()" block>
+        <button ion-button [hidden]=disables.filter (click)="Search()" full >
           {{'ionBasic.Sample.commonbuttons.send' | translate}}
         </button>
         </ion-col>

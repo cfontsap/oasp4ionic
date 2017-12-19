@@ -40,11 +40,11 @@
               "clear": "Clear Filter"
             }, 
            "add":{
-              "title":"Form to add new items to the DB",
-             "message":"Here you can add the new user"
+              "title":"Add form",
+             "message":"This form is used to add new items"
             },
            "modify":{
-              "title":"Form to modify items",
+              "title":"Modify form",
              "message":"Here you can modify the selected user"
             },
             "delete":{

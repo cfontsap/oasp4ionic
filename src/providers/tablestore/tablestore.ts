@@ -16,29 +16,18 @@ export class TablestoreProvider {
   
   
   
-  Search : any;
-  NoSearch: any;
+  Table : any;
+
 
   constructor(public http: HttpClient) {
-    console.log('Hello TablestoreProvider Provider');
-
-    this.Search = [{name:"",surname:"",age:1}];
-    this.NoSearch = [{name:"",surname:"",age:1}];
+    this.Table = [{name:"",surname:"",age:1}];;
   }
 
-  setSearch(table:Element[]){
-    this.Search = table;
+  setTable(table:Element[]){
+    this.Table = table;
   }
 
-  getSearch() : any {
-    return this.Search;
-  }
-
-  setNoSearch(table:any){
-    this.NoSearch = table;
-  }
-  
-  getNoSearch() : any {
-    return this.NoSearch;
+  getTable() : any {
+    return this.Table;
   }
 }

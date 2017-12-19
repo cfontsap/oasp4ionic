@@ -40,7 +40,7 @@
           "clear": "Limpiar busqueda"
         },
         "add": {
-          "title": "Formulario para añadir nuevos items",
+          "title": "Formulario para añadir",
           "message": "Aqui puedes añadir el nuevo item"
         },
         "modify": {

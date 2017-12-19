@@ -64,20 +64,29 @@ export class SampleoperationsdialogComponent {
       for(let i in this.cleanuser){
         this.cleanuser[i] = this.user[i];
       }
-      console.log(this.cleanuser);
+
       if(this.cleanuser.id!= null) this.user = this.cleanuser;
+      if(!this.user.name) return;
+  
       this.tableManagement.Save(this.user).subscribe(
         (data: any) => {
-
-          
-          console.log(data);
+          this.tableManagement.getTableM().subscribe(
+            (data:any) => {
+              this.store.setTable(data.result);
+            }
+          )
           this.cleanuser.id=null;
           this.dismiss();
 
         });
     }
 
-
+    validAdd(): boolean{
+      return false;
+    }
+    validSearch(): boolean{
+      return false;
+    }
     Search(){
       for (let i in this.user){
         if(this.user[i]=="") delete this.user[i]
@@ -88,7 +97,7 @@ export class SampleoperationsdialogComponent {
           for (let i in data.result) {
             data.result[i].checkbox = false;
           }
-          this.store.setSearch(data.result);
+          this.store.setTable(data.result);
           this.dismiss();
 
         }
@@ -96,7 +105,11 @@ export class SampleoperationsdialogComponent {
     }
 
     clearSearch(){
-      this.store.setSearch(this.store.getNoSearch());
+     this.tableManagement.getTableM().subscribe(
+       (data:any) => {
+         this.store.setTable(data.result);
+       }
+     )
       this.dismiss();
     }
 

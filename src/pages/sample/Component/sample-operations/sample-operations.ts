@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TablemanagementProvider } from '../../../../providers/tablemanagement/tablemanagement';
 import { SampleoperationsdialogComponent } from './sample-operations-dialog/sample-operations-dialog'
+import { TablestoreProvider } from '../../../../providers/tablestore/tablestore';
 
 /**
  * Generated class for the TableOperationsComponent component.
@@ -23,7 +24,7 @@ export class SampleOperationsComponent {
 
   constructor(public translate: TranslateService, public alertCtrl: AlertController,
     public tableManagement: TablemanagementProvider, public SamplePage: SamplePage,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController, public store: TablestoreProvider) {
   }
 
 
@@ -41,7 +42,7 @@ export class SampleOperationsComponent {
     this.isDisabled = true;
     let modal = this.modalCtrl.create(SampleoperationsdialogComponent, { dialog: "filter", edit: null });
     modal.present();
-    modal.onDidDismiss(() => this.SamplePage.reloadSamplePageAfterSearch());
+    modal.onDidDismiss(() => this.SamplePage.reloadSamplePageTable());
   }
 
   //Add Operation
@@ -49,37 +50,41 @@ export class SampleOperationsComponent {
 
     let modal = this.modalCtrl.create(SampleoperationsdialogComponent, { dialog: "add", edit: null });
     modal.present();
-    modal.onDidDismiss(() => this.SamplePage.reloadSamplePageTable());
+    modal.onDidDismiss(() => 
+    this.SamplePage.reloadSamplePageTable()
+    );
 
   }
-  AddClicked(Addform: any) {
-    this.tableManagement.Save(Addform).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.SamplePage.reloadSamplePageTable();
-      }
-    )
-  }
+  
   // deletes the selected element
   DeleteConfirmed() {
     let index = this.SamplePage.getindex(); // i get the index of the item to delete in the table we have in the view
     if (!index && index != 0) {
       return;
     }
+    let cleanuser = {name:null, surname:null, age:null};
     let search = this.SamplePage.tabletoshow[index]
-    console.log(search);
-    this.tableManagement.getItemId(search).subscribe(
+    for(let i in cleanuser){
+      cleanuser[i] = search[i];
+    }
+    
+    this.tableManagement.getItemId(cleanuser).subscribe(
       (Idresponse: any) => {
         this.tableManagement.DeleteItem(Idresponse.result[0].id).subscribe(
           (deleteresponse) => {
-            console.log(deleteresponse)
-            this.SamplePage.reloadSamplePageTable();
+            
+            this.tableManagement.getTableM().subscribe(
+              (data:any) => {
+                this.store.setTable(data.result);
+                this.SamplePage.reloadSamplePageTable();
+              }
+            );
+            
           }
         )
       }
     )
   }
-
 
   DeleteConfirmForm() {
 
@@ -93,33 +98,30 @@ export class SampleOperationsComponent {
         {
           text: DeleteTranslations.dismiss,
           handler: data => {
+            
           }
         },
         {
           text: DeleteTranslations.confirm,
           handler: data => {
-            console.log("tururu");
-            this.isDisabled = true;
             this.DeleteConfirmed();
           }
         }
       ]
     });
     prompt.present();
+    
+    
   }
 
   promptModifyClicked() {
-
-    this.tabletoshow = this.SamplePage.tabletoshow;
     let index = this.SamplePage.getindex();
     if (!index && index != 0) {
       return;
     }
-
-    let modal = this.modalCtrl.create(SampleoperationsdialogComponent, { dialog: "modify", edit: this.tabletoshow[index] });
+    let modal = this.modalCtrl.create(SampleoperationsdialogComponent, { dialog: "modify", edit:this.store.getTable()[index]});
     modal.present();
     modal.onDidDismiss(() => this.SamplePage.reloadSamplePageTable());
-
+    
   }
-
 }
