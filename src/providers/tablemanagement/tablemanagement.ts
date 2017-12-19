@@ -19,7 +19,7 @@ export class TablemanagementProvider {
     return this.http.post(this.BO.tableserv() + "search", {}, {});
   }
 
-  NewItemM(fullitem: any) {
+  Save(fullitem: any) {
     return this.http.post(this.BO.tableserv(), fullitem, {});
   }
 
@@ -33,11 +33,6 @@ export class TablemanagementProvider {
 
   Filter(SinglePart: any) {
     return this.http.post(this.BO.tableserv() + "search", SinglePart, {})
-  }
-
-
-  ModifyItem(fullitem: any): Observable<any> {
-    return this.http.post(this.BO.tableserv(), fullitem, {});
   }
 
 }

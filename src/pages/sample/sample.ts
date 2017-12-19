@@ -2,6 +2,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TablemanagementProvider } from '../../providers/tablemanagement/tablemanagement';
+import { TablestoreProvider } from '../../providers/tablestore/tablestore';
 
 
 
@@ -27,10 +28,11 @@ export class SamplePage {
   InfiniteScrollingIndex: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public tableManagement: TablemanagementProvider,
+    public tableManagement: TablemanagementProvider, public store: TablestoreProvider,
     public alertCtrl: AlertController, public translate: TranslateService
   ) {
     this.translate.setDefaultLang('en');
+    
   }
 
   NoMorethanOneCheckbox(p: any) {
@@ -52,9 +54,11 @@ export class SamplePage {
 
   reloadSamplePageTable() {
 
+    
     this.tableManagement.getTableM().subscribe(
       (data: any) => {
-        this.Lastoperation = data.result;
+        this.store.setNoSearch(data.result);
+        this.Lastoperation = this.store.getNoSearch();
         this.tabletoshow = [];
         for (let i = 0; i < this.FIRSTPAGINATIONTHRESHOLD; i++) {
           if (this.Lastoperation[i]) {
@@ -71,8 +75,10 @@ export class SamplePage {
   }
 
   reloadSamplePageAfterSearch(){
+
     this.tabletoshow=[];
-    console.log(this.Lastoperation)
+    this.Lastoperation = this.store.getSearch();
+
     if(this.Lastoperation.length == 0) return;
     let searchres = this.Lastoperation.length;
     if(this.FIRSTPAGINATIONTHRESHOLD < searchres) searchres = this.FIRSTPAGINATIONTHRESHOLD
@@ -97,9 +103,12 @@ export class SamplePage {
 
     this.tableManagement.getTableM().subscribe(
       (data: any) => {
-        this.Lastoperation = data.result;
+        this.store.setNoSearch(data.result);
+        this.store.setSearch(data.result);
+        this.Lastoperation = this.store.getNoSearch();
         for (let i = 0; i < this.FIRSTPAGINATIONTHRESHOLD; i++) {
           if (this.Lastoperation[i]) {
+            
             this.tabletoshow.push(this.Lastoperation[i]);
             this.tabletoshow[i].checkbox = false;
           }

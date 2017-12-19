@@ -19,15 +19,15 @@
   <form   >
     <ion-item>
       <ion-label>{{'ionBasic.Sample.name'| translate}}</ion-label>
-      <ion-input type="text" placeholder={{editDialog.name}} [(ngModel)]="user.name" name="name"></ion-input>
+      <ion-input type="text" [(ngModel)]="user.name" name="name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>{{'ionBasic.Sample.surname'| translate}}</ion-label>
-      <ion-input type="text" placeholder={{editDialog.surname}} [(ngModel)]="user.surname" name="password"></ion-input>
+      <ion-input type="text"  [(ngModel)]="user.surname" name="password"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>{{'ionBasic.Sample.age'| translate}}</ion-label>
-      <ion-input type="text" placeholder={{editDialog.age}} [(ngModel)]="user.age" name="age"></ion-input>
+      <ion-input type="text" [(ngModel)]="user.age" name="age"></ion-input>
     </ion-item>
     
   </form>

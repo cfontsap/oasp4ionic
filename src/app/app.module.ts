@@ -19,7 +19,8 @@ import { HeaderComponent } from '../components/header/header';
 import { TablemanagementProvider } from '../providers/tablemanagement/tablemanagement';
 import { SamplePage } from '../pages/sample/sample';
 import { HomePage } from '../pages/home/home';
-import { SampleoperationsdialogComponent } from '../pages/sample/Component/sample-operations-dialog/sample-operations-dialog'
+import { SampleoperationsdialogComponent } from '../pages/sample/Component/sample-operations/sample-operations-dialog/sample-operations-dialog'
+import { TablestoreProvider } from '../providers/tablestore/tablestore';
 
 
 
@@ -79,6 +80,7 @@ export function translateFactory(http: HttpClient) {
       useClass: HttpinterceptorProvider,
       multi: true},
     TablemanagementProvider,
+    TablestoreProvider,
      
   ]
 })
