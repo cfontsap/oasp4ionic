@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { SamplePage } from '../../../sample';
 import { TablemanagementProvider } from '../../../../../providers/tablemanagement/tablemanagement';
-import { SampleOperationsComponent } from '../../sample-operations/sample-operations';
+import { Item, SampleOperationsComponent } from '../../sample-operations/sample-operations';
 import { TablestoreProvider } from '../../../../../providers/tablestore/tablestore';
 /**
  * Generated class for the SampledialogComponent component.
@@ -17,12 +17,11 @@ import { TablestoreProvider } from '../../../../../providers/tablestore/tablesto
 })
 export class SampleoperationsdialogComponent {
     
-    user : {name: string , surname: string, age: number };
-    cleanuser :  {name:string, surname: string, age: number, id:number};
+    user : Item;
+    cleanuser : any;
     translations = {title : "Dialog", message: "message" }
     dialogtype = "";
-    editDialog : any = {name:null, surname: null, age:null};
-    disables : {filter : boolean } = {filter : true}
+    disables : {filter : boolean } = {filter : true};
 
     constructor(
       public platform: Platform, public params: NavParams,
@@ -34,10 +33,14 @@ export class SampleoperationsdialogComponent {
       this.getTranslation("ionBasic.Sample.operations." + this.params.get('dialog'))
       this.dialogtype = this.params.get('dialog');
       this.user = this.params.get('edit');
-      this.editDialog = this.params.get('edit');
+      
 
-      if(!this.editDialog) this.editDialog = {name:"",surname:"",age:""}
-      if(!this.user) this.user = { name:null, surname : null, age: null }
+      
+      if(!this.user) {
+        this.user.name = "";
+        this.user.surname = "";
+        this.user.age = null;
+      }
       
       this.cleanuser = {name:null, surname:null, age:null, id:null};
       if(this.dialogtype == "filter") this.disables.filter = false;
@@ -65,9 +68,9 @@ export class SampleoperationsdialogComponent {
         this.cleanuser[i] = this.user[i];
       }
 
-      if(this.cleanuser.id!= null) this.user = this.cleanuser;
+      if(this.cleanuser.id!= null) this.user = this.cleanuser; //user has more than name, surname and age, it includes private data
       if(!this.user.name) return;
-  
+      console.log(this.user);
       this.tableManagement.Save(this.user).subscribe(
         (data: any) => {
           this.tableManagement.getTableM().subscribe(

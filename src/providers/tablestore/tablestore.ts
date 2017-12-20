@@ -23,7 +23,7 @@ export class TablestoreProvider {
     this.Table = [{name:"",surname:"",age:1}];;
   }
 
-  setTable(table:Element[]){
+  setTable(table:any){
     this.Table = table;
   }
 

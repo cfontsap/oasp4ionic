@@ -12,13 +12,27 @@ import { TablestoreProvider } from '../../../../providers/tablestore/tablestore'
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
+
+export interface Item{
+  name:string ,
+  surname:string,
+  age:number,
+}
+
 @Component({
   selector: 'sample-operations',
   templateUrl: 'sample-operations.html'
 })
 export class SampleOperationsComponent {
 
+  DeleteTranslations: any = {};
+  interfaceuser : Item = { name:null, surname:null, age: null };
   tabletoshow: any;
+  DeleteButtonnames=["dismiss","confirm"];
+  DeleteButtons=[
+                 { text: this.getTranslation('ionBasic.Sample.operations.delete.dismiss'), handler: data => {  }}, 
+                 { text: this.getTranslation('ionBasic.Sample.operations.delete.confirm'), handler: data => { this.DeleteConfirmed(); } }
+                ]
 
   @Input() isDisabled: boolean = true;
 
@@ -34,7 +48,17 @@ export class SampleOperationsComponent {
     this.translate.get(text).subscribe((res: string) => {
       value = res;
     });
-
+    this.translate.onLangChange.subscribe(
+      () => {
+       for (let i in this.DeleteButtons){
+          this.translate.get("ionBasic.Sample.operations.delete."+this.DeleteButtonnames[i]).subscribe(
+            (data:any) => {
+              this.DeleteButtons[i] = data;
+            }
+          )
+      }
+    }
+    );
     return value;
   }
 
@@ -53,7 +77,6 @@ export class SampleOperationsComponent {
     modal.onDidDismiss(() => 
     this.SamplePage.reloadSamplePageTable()
     );
-
   }
   
   // deletes the selected element
@@ -62,12 +85,11 @@ export class SampleOperationsComponent {
     if (!index && index != 0) {
       return;
     }
-    let cleanuser = {name:null, surname:null, age:null};
+    let cleanuser = this.interfaceuser;
     let search = this.SamplePage.tabletoshow[index]
     for(let i in cleanuser){
       cleanuser[i] = search[i];
     }
-    
     this.tableManagement.getItemId(cleanuser).subscribe(
       (Idresponse: any) => {
         this.tableManagement.DeleteItem(Idresponse.result[0].id).subscribe(
@@ -87,27 +109,12 @@ export class SampleOperationsComponent {
   }
 
   DeleteConfirmForm() {
-
-    if (this.SamplePage.getindex() == null) return;
-    let DeleteTranslations: any = {};
-    DeleteTranslations = this.getTranslation('ionBasic.Sample.operations.delete');
+    
+    this.DeleteTranslations = this.getTranslation('ionBasic.Sample.operations.delete');
     let prompt = this.alertCtrl.create({
-      title: DeleteTranslations.title,
-      message: DeleteTranslations.message,
-      buttons: [
-        {
-          text: DeleteTranslations.dismiss,
-          handler: data => {
-            
-          }
-        },
-        {
-          text: DeleteTranslations.confirm,
-          handler: data => {
-            this.DeleteConfirmed();
-          }
-        }
-      ]
+      title: this.DeleteTranslations.title,
+      message: this.DeleteTranslations.message,
+      buttons: this.DeleteButtons
     });
     prompt.present();
     

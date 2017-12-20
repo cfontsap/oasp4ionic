@@ -14,6 +14,19 @@ import { LoadingController } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
+export interface Item{
+    name:string,
+    surname:string,
+    age:number,
+}
+
+export interface ItemTable{
+  name:string,
+  surname:string,
+  age:number,
+  checkbox:boolean
+}
+
 @IonicPage()
 @Component({
   selector: 'page-table',
@@ -22,7 +35,7 @@ import { LoadingController } from 'ionic-angular';
 export class SamplePage {
 
   Delete_and_Modified_Buttons_Disabled: boolean = true;
-  Lastoperation: [{ name: string, surname: string, age: number, checkbox: boolean}];
+  Lastoperation: ItemTable[];
   tabletoshow: any = []
   FIRSTPAGINATIONTHRESHOLD = 15;
   NEXTELEMENTSTOLOAD = 10;
