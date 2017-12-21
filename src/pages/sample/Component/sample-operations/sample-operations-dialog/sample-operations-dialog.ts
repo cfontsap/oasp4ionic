@@ -29,22 +29,12 @@ export class SampleoperationsdialogComponent {
       public tableManagement: TablemanagementProvider, public store: TablestoreProvider,
     ) {
       
-      
       this.getTranslation("ionBasic.Sample.operations." + this.params.get('dialog'))
       this.dialogtype = this.params.get('dialog');
       this.user = this.params.get('edit');
-      
-
-      
-      if(!this.user) {
-        this.user.name = "";
-        this.user.surname = "";
-        this.user.age = null;
-      }
-      
-      this.cleanuser = {name:null, surname:null, age:null, id:null};
+      if(!this.user) this.user = {name:null, surname:null, age:null};
       if(this.dialogtype == "filter") this.disables.filter = false;
-      
+      this.cleanuser = {name:null, surname:null, age:null, id:null};
       
     }
   
@@ -52,14 +42,14 @@ export class SampleoperationsdialogComponent {
       this.translate.get(dialog).subscribe(
         (data:any) => {
           this.translations = data;
-          // console.log(data);
         }
       )
     }
 
     dismiss() {
-      this.disables.filter = true;
+      
       this.viewCtrl.dismiss();
+      this.disables.filter = true;
     }
 
     AddorModify(){
@@ -70,7 +60,7 @@ export class SampleoperationsdialogComponent {
 
       if(this.cleanuser.id!= null) this.user = this.cleanuser; //user has more than name, surname and age, it includes private data
       if(!this.user.name) return;
-      console.log(this.user);
+      
       this.tableManagement.Save(this.user).subscribe(
         (data: any) => {
           this.tableManagement.getTableM().subscribe(
@@ -84,12 +74,6 @@ export class SampleoperationsdialogComponent {
         });
     }
 
-    validAdd(): boolean{
-      return false;
-    }
-    validSearch(): boolean{
-      return false;
-    }
     Search(){
       for (let i in this.user){
         if(this.user[i]=="") delete this.user[i]

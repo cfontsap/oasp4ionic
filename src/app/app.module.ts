@@ -1,4 +1,4 @@
-import { LanguagePage } from '../pages/language/language';
+
 import {SampleOperationsComponent} from '../pages/sample/Component/sample-operations/sample-operations';
 import { HttpinterceptorProvider } from '../providers/security/httpinterceptor';
 import { AuthServiceProvider } from '../providers/security/auth-service';
@@ -41,7 +41,7 @@ export function translateFactory(http: HttpClient) {
     LoginPage,
     HeaderComponent,
     SamplePage,
-    LanguagePage,
+    
     SampleOperationsComponent,
     SampleoperationsdialogComponent
   ],
@@ -63,7 +63,7 @@ export function translateFactory(http: HttpClient) {
     HomePage,
     LoginPage,
     SamplePage,
-    LanguagePage,
+    
     SampleoperationsdialogComponent
   ],
   providers: [

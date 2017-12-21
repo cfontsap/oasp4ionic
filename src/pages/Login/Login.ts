@@ -18,7 +18,7 @@ export class LoginPage {
   constructor( public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthServiceProvider , 
     public translate: TranslateService, public loginp : LoginProvider ) {
     this.user = {username : 'waiter' ,password : 'waiter'};
-    translate.setDefaultLang('en');
+    //translate.setDefaultLang('en');
   }
 
   

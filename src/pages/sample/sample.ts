@@ -14,11 +14,7 @@ import { LoadingController } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-export interface Item{
-    name:string,
-    surname:string,
-    age:number,
-}
+
 
 export interface ItemTable{
   name:string,
@@ -68,7 +64,7 @@ export class SamplePage {
   presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
-      duration: 1000
+      duration: 500
     });
     loader.present();
   }

@@ -38,19 +38,14 @@
 
 <ion-footer>
         
-
         <button ion-button [hidden]=!disables.filter (click)="AddorModify()" full>
           {{'ionBasic.Sample.commonbuttons.send' | translate}}
         </button>
         <button ion-button [hidden]=disables.filter (click)="Search()" full >
           {{'ionBasic.Sample.commonbuttons.send' | translate}}
         </button>
-
         <button ion-button [hidden]=disables.filter (click)="clearSearch()" block>
           {{'ionBasic.Sample.operations.filter.clear' | translate}}
         </button>
-        
-        <button ion-button [hidden]=!disables.filter (click)="dismiss()" block>
-          {{'ionBasic.Sample.commonbuttons.dismiss' | translate}}
-        </button>
+
 </ion-footer>

@@ -44,6 +44,7 @@ export class HeaderComponent {
     //ionic uses a jwt token for security, we don't need to connect to the server since we don't have a season, erasing the jwt is enough.
     this.auth.setAuthenthicated(false);
     this.auth.setToken("");
+    this.translate.use(this.translate.defaultLang);
     this.navCtrl.setRoot(LoginPage);
   }
 
