@@ -1,7 +1,7 @@
 
 import {SampleOperationsComponent} from '../pages/sample/Component/sample-operations/sample-operations';
-import { HttpinterceptorProvider } from '../providers/security/httpinterceptor';
-import { AuthServiceProvider } from '../providers/security/auth-service';
+import { HttpInterceptorProvider } from '../providers/security/httpinterceptor';
+import { AuthServiceProvider } from '../providers/security/auth-Service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -11,16 +11,17 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/Login/Login';
 import { LoginProvider } from '../providers/login/loginProvider';
-import { BussinessOperatorProvider } from '../providers/shared/bussiness-operator';
 import { TranslateLoader } from '@ngx-translate/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HeaderComponent } from '../components/header/header';
-import { TablemanagementProvider } from '../providers/tablemanagement/tablemanagement';
+import {SamplestoreProvider} from '../pages/sample/provider/samplestore/samplestore';
+import {SampleBussinessProvider}  from '../pages/sample/provider/sampleBussiness/sampleBussiness';
 import { SamplePage } from '../pages/sample/sample';
 import { HomePage } from '../pages/home/home';
 import { SampleoperationsdialogComponent } from '../pages/sample/Component/sample-operations/sample-operations-dialog/sample-operations-dialog'
-import { TablestoreProvider } from '../providers/tablestore/tablestore';
+import { BussinessOperatorProvider } from '../providers/shared/Bussiness-Operator';
+
 
 
 
@@ -77,10 +78,10 @@ export function translateFactory(http: HttpClient) {
     LoginProvider,
     AuthServiceProvider,
     {provide: HTTP_INTERCEPTORS,
-      useClass: HttpinterceptorProvider,
+      useClass: HttpInterceptorProvider,
       multi: true},
-    TablemanagementProvider,
-    TablestoreProvider,
+    SampleBussinessProvider,
+    SamplestoreProvider,
      
   ]
 })

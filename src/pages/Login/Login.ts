@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { LoginProvider } from '../../providers/login/loginProvider'
-import { AuthServiceProvider } from '../../providers/security/auth-service';
+import { AuthServiceProvider } from '../../providers/security/auth-Service';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';

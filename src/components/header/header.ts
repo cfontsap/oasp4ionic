@@ -1,5 +1,5 @@
 import { NavController } from 'ionic-angular';
-import { AuthServiceProvider } from '../../providers/security/auth-service';
+import { AuthServiceProvider } from '../../providers/security/auth-Service';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, Input } from '@angular/core';
 import { LoginPage } from '../../pages/Login/Login';

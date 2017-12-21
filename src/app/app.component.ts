@@ -1,6 +1,6 @@
 
 import { HomePage } from '../pages/home/home';
-import { AuthServiceProvider } from '../providers/security/auth-service';
+import { AuthServiceProvider } from '../providers/security/auth-Service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';

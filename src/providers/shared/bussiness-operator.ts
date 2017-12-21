@@ -11,8 +11,7 @@ export class BussinessOperatorProvider {
 
   public serverPath = 'http://localhost:8081/oasp4j-sample-server/';
   public restPath = 'http://localhost:8081/oasp4j-sample-server/services/rest/';
-  public serverPathM = 'http://localhost:8081/mythaistar/';
-  public restPathM = 'http://localhost:8081/mythaistar/services/rest/';
+
 
   constructor() { }
 
@@ -25,7 +24,7 @@ export class BussinessOperatorProvider {
   getCsrf() {
       return this.restPath + 'security/v1/csrftoken';
   }
-  tableserv(){
+  sampleService(){
       return this.restPath + 'ionicBasic/v1/sample/';
   }
 

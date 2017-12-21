@@ -2,9 +2,10 @@ import { AlertController, NavParams, Platform, ViewController } from 'ionic-angu
 import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { SamplePage } from '../../../sample';
-import { TablemanagementProvider } from '../../../../../providers/tablemanagement/tablemanagement';
-import { Item, SampleOperationsComponent } from '../../sample-operations/sample-operations';
-import { TablestoreProvider } from '../../../../../providers/tablestore/tablestore';
+import { SamplestoreProvider } from '../../../provider/samplestore/samplestore';
+import { SampleBussinessProvider } from '../../../provider/sampleBussiness/sampleBussiness';
+import { SampleItem, SampleOperationsComponent } from '../../sample-operations/sample-operations';
+
 /**
  * Generated class for the SampledialogComponent component.
  *
@@ -17,7 +18,7 @@ import { TablestoreProvider } from '../../../../../providers/tablestore/tablesto
 })
 export class SampleoperationsdialogComponent {
     
-    user : Item;
+    user : SampleItem;
     cleanuser : any;
     translations = {title : "Dialog", message: "message" }
     dialogtype = "";
@@ -26,7 +27,7 @@ export class SampleoperationsdialogComponent {
     constructor(
       public platform: Platform, public params: NavParams,
       public viewCtrl: ViewController, public translate: TranslateService,
-      public tableManagement: TablemanagementProvider, public store: TablestoreProvider,
+      public sampleManagement: SampleBussinessProvider, public store: SamplestoreProvider,
     ) {
       
       this.getTranslation("ionBasic.Sample.operations." + this.params.get('dialog'))
@@ -61,9 +62,9 @@ export class SampleoperationsdialogComponent {
       if(this.cleanuser.id!= null) this.user = this.cleanuser; //user has more than name, surname and age, it includes private data
       if(!this.user.name) return;
       
-      this.tableManagement.Save(this.user).subscribe(
+      this.sampleManagement.Save(this.user).subscribe(
         (data: any) => {
-          this.tableManagement.getTableM().subscribe(
+          this.sampleManagement.getTableM().subscribe(
             (data:any) => {
               this.store.setTable(data.result);
             }
@@ -79,7 +80,7 @@ export class SampleoperationsdialogComponent {
         if(this.user[i]=="") delete this.user[i]
       }
       if(!this.user) return;
-      this.tableManagement.Filter(this.user).subscribe(
+      this.sampleManagement.Filter(this.user).subscribe(
         (data : any) => {
           for (let i in data.result) {
             data.result[i].checkbox = false;
@@ -92,7 +93,7 @@ export class SampleoperationsdialogComponent {
     }
 
     clearSearch(){
-     this.tableManagement.getTableM().subscribe(
+     this.sampleManagement.getTableM().subscribe(
        (data:any) => {
          this.store.setTable(data.result);
        }

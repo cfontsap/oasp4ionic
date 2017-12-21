@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 
 
 @Injectable()
-export class TablestoreProvider {
+export class SamplestoreProvider {
 
   
   

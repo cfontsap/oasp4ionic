@@ -1,9 +1,10 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TablemanagementProvider } from '../../providers/tablemanagement/tablemanagement';
-import { TablestoreProvider } from '../../providers/tablestore/tablestore';
+
 import { LoadingController } from 'ionic-angular';
+import { SampleBussinessProvider } from './provider/sampleBussiness/sampleBussiness';
+import { SamplestoreProvider } from './provider/samplestore/samplestore';
 
 
 
@@ -16,7 +17,7 @@ import { LoadingController } from 'ionic-angular';
 
 
 
-export interface ItemTable{
+export interface SampleItem{
   name:string,
   surname:string,
   age:number,
@@ -31,14 +32,14 @@ export interface ItemTable{
 export class SamplePage {
 
   Delete_and_Modified_Buttons_Disabled: boolean = true;
-  Lastoperation: ItemTable[];
+  Lastoperation: SampleItem[];
   tabletoshow: any = []
   FIRSTPAGINATIONTHRESHOLD = 15;
   NEXTELEMENTSTOLOAD = 10;
   InfiniteScrollingIndex: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public tableManagement: TablemanagementProvider, public store: TablestoreProvider,
+    public sampleManagement: SampleBussinessProvider, public store: SamplestoreProvider,
     public alertCtrl: AlertController, public translate: TranslateService,
     public loadingCtrl: LoadingController
   ) {
@@ -74,6 +75,7 @@ export class SamplePage {
     this.Lastoperation = this.store.getTable();
     this.Delete_and_Modified_Buttons_Disabled = true;
     this.tabletoshow = [];
+    
     for (let i = 0; i < this.FIRSTPAGINATIONTHRESHOLD; i++) {
       if (this.Lastoperation[i]) {
       this.tabletoshow.push(this.Lastoperation[i]);
@@ -96,7 +98,7 @@ export class SamplePage {
 
   ionViewWillEnter() {
     this.presentLoading();
-    this.tableManagement.getTableM().subscribe(
+    this.sampleManagement.getTableM().subscribe(
       (data: any) => {
         
         this.store.setTable(data.result);

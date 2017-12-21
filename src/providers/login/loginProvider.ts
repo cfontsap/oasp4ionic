@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BussinessOperatorProvider } from '../shared/bussiness-operator'
+import { BussinessOperatorProvider } from '../shared/Bussiness-Operator'
 /*
   Generated class for the LoginProvider provider.
 

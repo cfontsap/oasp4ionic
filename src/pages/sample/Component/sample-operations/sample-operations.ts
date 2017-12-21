@@ -2,10 +2,9 @@ import { SamplePage } from '../../sample';
 import { AlertController, ModalController } from 'ionic-angular';
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { TablemanagementProvider } from '../../../../providers/tablemanagement/tablemanagement';
 import { SampleoperationsdialogComponent } from './sample-operations-dialog/sample-operations-dialog'
-import { TablestoreProvider } from '../../../../providers/tablestore/tablestore';
-
+import { SamplestoreProvider } from '../../provider/samplestore/samplestore';
+import { SampleBussinessProvider } from '../../provider/sampleBussiness/sampleBussiness';
 /**
  * Generated class for the TableOperationsComponent component.
  *
@@ -13,7 +12,7 @@ import { TablestoreProvider } from '../../../../providers/tablestore/tablestore'
  * Components.
  */
 
-export interface Item{
+export interface SampleItem{
   name:string ,
   surname:string,
   age:number,
@@ -26,7 +25,7 @@ export interface Item{
 export class SampleOperationsComponent {
 
   DeleteTranslations: any = {};
-  interfaceuser : Item = { name:null, surname:null, age: null };
+  interfaceuser : SampleItem = { name:null, surname:null, age: null, };
   tabletoshow: any;
   DeleteButtonnames=["dismiss","confirm"];
   DeleteButtons=[
@@ -37,8 +36,8 @@ export class SampleOperationsComponent {
   @Input() isDisabled: boolean = true;
 
   constructor(public translate: TranslateService, public alertCtrl: AlertController,
-    public tableManagement: TablemanagementProvider, public SamplePage: SamplePage,
-    public modalCtrl: ModalController, public store: TablestoreProvider) {
+    public sampleManagement: SampleBussinessProvider, public SamplePage: SamplePage,
+    public modalCtrl: ModalController, public store: SamplestoreProvider) {
   }
 
 
@@ -90,12 +89,12 @@ export class SampleOperationsComponent {
     for(let i in cleanuser){
       cleanuser[i] = search[i];
     }
-    this.tableManagement.getItemId(cleanuser).subscribe(
+    this.sampleManagement.getItemId(cleanuser).subscribe(
       (Idresponse: any) => {
-        this.tableManagement.DeleteItem(Idresponse.result[0].id).subscribe(
+        this.sampleManagement.DeleteItem(Idresponse.result[0].id).subscribe(
           (deleteresponse) => {
             
-            this.tableManagement.getTableM().subscribe(
+            this.sampleManagement.getTableM().subscribe(
               (data:any) => {
                 this.store.setTable(data.result);
                 this.SamplePage.reloadSamplePageTable();
