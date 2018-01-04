@@ -22,13 +22,13 @@
     "subtitle": "Usuario o contraseña erroneo",
     "dismiss": "cerrar"
   },
-  "ionBasic": {
-    "title": "ionBasic Título",
+  "ionicBasic": {
+    "title": "ionicBasic Título",
     "description": "Esta es la plantilla básica de ionic",
-    "Sample": {
-      "name": "Nombre",
-      "surname": "Apellidos",
-      "age": "Edad",
+    "sample": {
+        "name":"name_ES",
+        "surname":"surname_ES",
+        "age":"age_ES",
       "commonbuttons": {
         "send": "Enviar",
         "dismiss": "Cerrar"
@@ -63,8 +63,5 @@
     "errorMsg": "Usuario o contraseña erroneos"
   },
   "example": "ejemplo",
-  "Home": "Principal",
-  "Welcome": "Welcome",
-  "Language": "Language",
-  "p": "wea"
+  "Home": "Principal"
 }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
-  Generated class for the TablestoreProvider provider.
+  Generated class for the samplestoreProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 
 
 @Injectable()
-export class SamplestoreProvider {
+export class samplestoreProvider {
 
   
   
@@ -20,7 +20,7 @@ export class SamplestoreProvider {
 
 
   constructor(public http: HttpClient) {
-    this.Table = [{name:"",surname:"",age:1}];;
+    this.Table = [{ name:null, surname:null, age:null,}];
   }
 
   setTable(table:any){

@@ -1,13 +1,12 @@
-import { AlertController, NavParams, Platform, ViewController } from 'ionic-angular';
+import { NavParams, Platform, ViewController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
-import { SamplePage } from '../../../sample';
-import { SamplestoreProvider } from '../../../provider/samplestore/samplestore';
-import { SampleBussinessProvider } from '../../../provider/sampleBussiness/sampleBussiness';
-import { SampleItem, SampleOperationsComponent } from '../../sample-operations/sample-operations';
+import { samplestoreProvider } from '../../../provider/samplestore/samplestore';
+import { sampleBusinessProvider } from '../../../provider/sample-business/sample-business';
+import { sampleItem} from '../../sample-operations/sample-operations';
 
 /**
- * Generated class for the SampledialogComponent component.
+ * Generated class for the sampledialogComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
@@ -16,9 +15,9 @@ import { SampleItem, SampleOperationsComponent } from '../../sample-operations/s
   selector: 'sampledialog',
   templateUrl: 'sample-operations-dialog.html'
 })
-export class SampleoperationsdialogComponent {
+export class sampleoperationsdialogComponent {
     
-    user : SampleItem;
+    user : sampleItem;
     cleanuser : any;
     translations = {title : "Dialog", message: "message" }
     dialogtype = "";
@@ -27,15 +26,15 @@ export class SampleoperationsdialogComponent {
     constructor(
       public platform: Platform, public params: NavParams,
       public viewCtrl: ViewController, public translate: TranslateService,
-      public sampleManagement: SampleBussinessProvider, public store: SamplestoreProvider,
+      public sampleBusiness: sampleBusinessProvider, public store: samplestoreProvider,
     ) {
       
-      this.getTranslation("ionBasic.Sample.operations." + this.params.get('dialog'))
+      this.getTranslation("ionicBasic.sample.operations." + this.params.get('dialog'))
       this.dialogtype = this.params.get('dialog');
       this.user = this.params.get('edit');
-      if(!this.user) this.user = {name:null, surname:null, age:null};
+      if(!this.user) this.user = {  name:null, surname:null, age:null,};
       if(this.dialogtype == "filter") this.disables.filter = false;
-      this.cleanuser = {name:null, surname:null, age:null, id:null};
+      this.cleanuser = { name:null , surname:null , age:null , id:null};
       
     }
   
@@ -62,9 +61,9 @@ export class SampleoperationsdialogComponent {
       if(this.cleanuser.id!= null) this.user = this.cleanuser; //user has more than name, surname and age, it includes private data
       if(!this.user.name) return;
       
-      this.sampleManagement.Save(this.user).subscribe(
+      this.sampleBusiness.Save(this.user).subscribe(
         (data: any) => {
-          this.sampleManagement.getTableM().subscribe(
+          this.sampleBusiness.getTableM().subscribe(
             (data:any) => {
               this.store.setTable(data.result);
             }
@@ -80,7 +79,7 @@ export class SampleoperationsdialogComponent {
         if(this.user[i]=="") delete this.user[i]
       }
       if(!this.user) return;
-      this.sampleManagement.Filter(this.user).subscribe(
+      this.sampleBusiness.Filter(this.user).subscribe(
         (data : any) => {
           for (let i in data.result) {
             data.result[i].checkbox = false;
@@ -93,7 +92,7 @@ export class SampleoperationsdialogComponent {
     }
 
     clearSearch(){
-     this.sampleManagement.getTableM().subscribe(
+     this.sampleBusiness.getTableM().subscribe(
        (data:any) => {
          this.store.setTable(data.result);
        }

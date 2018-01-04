@@ -1,28 +1,33 @@
-<div>
-  <ion-navbar class="bar bar-header bar-positive" color="primary">
 
-    <ion-title>{{Title}}</ion-title>
+  <div >
+    <ion-navbar class="bar bar-header bar-positive" color="primary">
 
-    <button ion-button menuToggle="left" *ngIf="isauthenthicated()">
-      <ion-icon name="menu"></ion-icon>
-    </button>
+                <ion-title>{{Title}}</ion-title>
 
-    <ion-buttons end>
-      <ng-container *ngFor="let lang of langs">
-        <button *ngIf="Showlanguage(lang)" ion-button end clear (click)="togglelanguage(lang)">
-          {{lang}}
-        </button>
-      </ng-container>
+                <button ion-button  menuToggle="left" *ngIf="isauthenthicated()">
+                    <ion-icon name="menu"></ion-icon>    
+                </button>
 
-    </ion-buttons>
+                <ion-buttons end>
+                    <ng-container *ngFor="let lang of langs">
+                            <button  *ngIf="Showlanguage(lang)" ion-button end clear (click)="togglelanguage(lang)">
+                                    {{lang}}
+                                </button>
+                    </ng-container>
+                    
+                </ion-buttons>
+                
+                
+                
 
-    <ion-buttons end>
+                <ion-buttons end>
+                  
 
+                <button id="logoutbutton" *ngIf="isauthenthicated()"  ion-button end clear (click)="logout()" >
+                    <ion-icon name="exit"></ion-icon>
+                </button>
 
-      <button id="logoutbutton" *ngIf="isauthenthicated()" ion-button end clear (click)="logout()">
-        <ion-icon name="exit"></ion-icon>
-      </button>
+                </ion-buttons>          
+    </ion-navbar>
+  </div>
 
-    </ion-buttons>
-  </ion-navbar>
-</div>

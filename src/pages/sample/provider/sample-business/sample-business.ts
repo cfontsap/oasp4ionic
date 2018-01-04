@@ -1,19 +1,18 @@
-
+import { BusinessOperatorProvider } from '../../../../providers/shared/business-operator'
 import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BussinessOperatorProvider } from '../../../../providers/shared/Bussiness-Operator';
 // import { HTTP } from '@ionic-native/http';
 /*
-  Generated class for the TablemanagementProvider provider.
+  Generated class for the samplebusinessProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
 @Injectable()
-export class SampleBussinessProvider {
+export class sampleBusinessProvider {
 
-  constructor(public http: HttpClient, public BO: BussinessOperatorProvider) {
+  constructor(public http: HttpClient, public BO: BusinessOperatorProvider) {
   }
 
   getTableM(): Observable<any> {

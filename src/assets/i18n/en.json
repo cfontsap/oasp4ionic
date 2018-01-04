@@ -8,27 +8,25 @@
       "Modify": "Modify",
       "Inspect": "Inspect",
       "Delete": "Delete",
-      "Filter":"Filter",
-      "Language":"Language"
+      "Filter":"Filter"
     },
     "header": {
-      "title": "OASP4JS",
-      "error": "LOGIN ERROR",
-      "EN": "English",
-      "ES": "Spanish"
+      "title": "Ionic",
+      "error": "LOGIN ERROR"
     },
-    "ALERT":{
-      "TITLE":"Error",
-      "SUBTITLE":"Wrong User and/or password",
-      "DISMISS":"Close"
+     "alert":{
+      "title":"Error",
+      "subtitle":"Wrong User and/or password",
+      "dismiss":"Close"
     },
-    "ionBasic": {
-      "title": "ionBasic Title",
+    "ionicBasic": {
+      "title": "ionicBasic Title",
       "description": "This is the basic template for ionic",
-      "Sample": {
-        "name": "Name",
-        "surname": "Surname",
-        "age": "Age",
+      "sample": {
+       
+        "name":"name_EN",
+        "surname":"surname_EN",
+        "age":"age_EN",
         "commonbuttons":{
           "send": "Send",
           "dismiss":"Close"
@@ -63,7 +61,5 @@
       "errorMsg": "Wrong username or password"
     },
     "example":"example",
-    "Home":"Home",
-    "Welcome":"Welcome"
-    
+    "Home":"Home"
   }

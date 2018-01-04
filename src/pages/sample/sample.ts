@@ -1,49 +1,36 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
-
 import { LoadingController } from 'ionic-angular';
-import { SampleBussinessProvider } from './provider/sampleBussiness/sampleBussiness';
-import { SamplestoreProvider } from './provider/samplestore/samplestore';
+import { sampleBusinessProvider } from './provider/sample-business/sample-business';
+import { samplestoreProvider } from './provider/samplestore/samplestore';
 
 
-
-/**
- * Generated class for the TablePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-
-
-export interface SampleItem{
-  name:string,
-  surname:string,
-  age:number,
+export interface sampleItem{
+    name: String ,    surname: String ,    age: number ,
   checkbox:boolean
 }
 
+
 @IonicPage()
 @Component({
-  selector: 'page-table',
+  selector: 'sample-table',
   templateUrl: 'sample.html',
 })
-export class SamplePage {
+export class samplePage {
 
   Delete_and_Modified_Buttons_Disabled: boolean = true;
-  Lastoperation: SampleItem[];
+  Lastoperation: sampleItem[];
   tabletoshow: any = []
   FIRSTPAGINATIONTHRESHOLD = 15;
   NEXTELEMENTSTOLOAD = 10;
   InfiniteScrollingIndex: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public sampleManagement: SampleBussinessProvider, public store: SamplestoreProvider,
+    public sampleBusiness: sampleBusinessProvider, public store: samplestoreProvider,
     public alertCtrl: AlertController, public translate: TranslateService,
     public loadingCtrl: LoadingController
   ) {
-    this.translate.setDefaultLang('en'); 
   }
 
   NoMorethanOneCheckbox(p: any) {
@@ -62,15 +49,8 @@ export class SamplePage {
     }
   }
 
-  presentLoading() {
-    let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 500
-    });
-    loader.present();
-  }
 
-  reloadSamplePageTable() {
+  reloadsamplePageTable() {
 
     this.Lastoperation = this.store.getTable();
     this.Delete_and_Modified_Buttons_Disabled = true;
@@ -97,8 +77,7 @@ export class SamplePage {
   }
 
   ionViewWillEnter() {
-    this.presentLoading();
-    this.sampleManagement.getTableM().subscribe(
+    this.sampleBusiness.getTableM().subscribe(
       (data: any) => {
         
         this.store.setTable(data.result);
@@ -110,12 +89,14 @@ export class SamplePage {
             this.tabletoshow[i].checkbox = false;
           }
         }
-        this.InfiniteScrollingIndex = this.FIRSTPAGINATIONTHRESHOLD; // we update of the first of the following items to be loaded.
+        this.InfiniteScrollingIndex = this.FIRSTPAGINATIONTHRESHOLD;
+        
       }, (err) => {
         console.log(err);
       }
-    )
-  }
+      )
+    }
+    
 
   doInfinite(infiniteScroll) {
     

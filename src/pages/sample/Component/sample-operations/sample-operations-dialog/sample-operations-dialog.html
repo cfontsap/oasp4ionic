@@ -1,4 +1,4 @@
-<!-- Generated template for the SampledialogComponent component -->
+<!-- Generated template for the sampledialogComponent component -->
 <ion-header>
   <ion-toolbar color="primary" >
     <ion-title align=center>
@@ -19,19 +19,20 @@
   
   <div align=center style="font-size: 16px" padding >{{translations.message}}</div>
   <form>
-    <ion-item>
-      <ion-label>{{'ionBasic.Sample.name'| translate}}</ion-label>
-      <ion-input  [(ngModel)]="user.name" name="name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>{{'ionBasic.Sample.surname'| translate}}</ion-label>
-      <ion-input   [(ngModel)]="user.surname" name="password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>{{'ionBasic.Sample.age'| translate}}</ion-label>
-      <ion-input  [(ngModel)]="user.age" name="age"></ion-input>
-    </ion-item>
-    
+  
+        <ion-item>
+          <ion-label>{{'ionicBasic.sample.name'| translate}}</ion-label>
+          <ion-input   [(ngModel)]="user.name" name="name"></ion-input>
+      </ion-item>
+        <ion-item>
+          <ion-label>{{'ionicBasic.sample.surname'| translate}}</ion-label>
+          <ion-input   [(ngModel)]="user.surname" name="surname"></ion-input>
+      </ion-item>
+        <ion-item>
+          <ion-label>{{'ionicBasic.sample.age'| translate}}</ion-label>
+          <ion-input   type="number"  [(ngModel)]="user.age" name="age"></ion-input>
+      </ion-item>
+     
   </form>
 
 </ion-content>
@@ -39,13 +40,13 @@
 <ion-footer>
         
         <button ion-button [hidden]=!disables.filter (click)="AddorModify()" full>
-          {{'ionBasic.Sample.commonbuttons.send' | translate}}
+          {{'ionicBasic.sample.commonbuttons.send' | translate}}
         </button>
         <button ion-button [hidden]=disables.filter (click)="Search()" full >
-          {{'ionBasic.Sample.commonbuttons.send' | translate}}
+          {{'ionicBasic.sample.commonbuttons.send' | translate}}
         </button>
         <button ion-button [hidden]=disables.filter (click)="clearSearch()" block>
-          {{'ionBasic.Sample.operations.filter.clear' | translate}}
+          {{'ionicBasic.sample.operations.filter.clear' | translate}}
         </button>
         
 

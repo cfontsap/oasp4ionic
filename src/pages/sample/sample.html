@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <layoutheader Title="Sample"></layoutheader>
+  <layoutheader Title="sample"></layoutheader>
 </ion-header>
 
 
@@ -16,9 +16,9 @@
       <ion-col>
         <ion-checkbox (click)="NoMorethanOneCheckbox(i)" checked="{{p.checkbox}}"></ion-checkbox>
       </ion-col>
-      <ion-col>{{p.name}}</ion-col>
-      <ion-col>{{p.surname}}</ion-col>
-      <ion-col>{{p.age}}</ion-col>
+        <ion-col>{{p.name}}</ion-col>
+        <ion-col>{{p.surname}}</ion-col>
+        <ion-col>{{p.age}}</ion-col>
     </ion-row>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>

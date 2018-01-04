@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BussinessOperatorProvider } from '../shared/Bussiness-Operator'
+import { AuthServiceProvider } from '../security/auth-service'
+import { BusinessOperatorProvider } from '../shared/business-operator'
 /*
   Generated class for the LoginProvider provider.
 
@@ -10,26 +11,29 @@ import { BussinessOperatorProvider } from '../shared/Bussiness-Operator'
 */
 @Injectable()
 export class LoginProvider {
-
-
-  data: any;
-  header = '';
-
-
-  constructor(public http: HttpClient, private BO: BussinessOperatorProvider) {
-    this.data = null;
+  
+  constructor(public http: HttpClient, public authservice : AuthServiceProvider ,  
+    private BO: BusinessOperatorProvider) {
+  
   }
 
-  login(loginparams: any): Observable<any> {
-    // this calls a function that connects to a rest service
-    return this.IonicAngularLogin(loginparams.username, loginparams.password)
+
+  IonicAngularLogin(login , password) :Observable<any>  {
+
+      return this.http.post( this.BO.login() , //url
+        {username: login,password: password}, //body
+          {responseType: "text", observe: 'response'});
+
   }
 
-  // uses angular http
-  IonicAngularLogin(login, password): Observable<any> {
-    return this.http.post(this.BO.login(), //url
-      { username: login, password: password }, //body
-      { responseType: "text", observe: 'response' });
+  
+  login(loginparams : any): Observable<any> {
+    return this.IonicAngularLogin(loginparams.username, loginparams.password) 
   }
+
+  
+
+
+
 
 }

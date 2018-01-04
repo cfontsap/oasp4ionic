@@ -1,7 +1,5 @@
-
-import {SampleOperationsComponent} from '../pages/sample/Component/sample-operations/sample-operations';
-import { HttpInterceptorProvider } from '../providers/security/httpinterceptor';
-import { AuthServiceProvider } from '../providers/security/auth-Service';
+import { HttpinterceptorProvider } from '../providers/security/httpInterceptor';
+import { AuthServiceProvider } from '../providers/security/auth-service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -15,25 +13,18 @@ import { TranslateLoader } from '@ngx-translate/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HeaderComponent } from '../components/header/header';
-import {SamplestoreProvider} from '../pages/sample/provider/samplestore/samplestore';
-import {SampleBussinessProvider}  from '../pages/sample/provider/sampleBussiness/sampleBussiness';
-import { SamplePage } from '../pages/sample/sample';
 import { HomePage } from '../pages/home/home';
-import { SampleoperationsdialogComponent } from '../pages/sample/Component/sample-operations/sample-operations-dialog/sample-operations-dialog'
-import { BussinessOperatorProvider } from '../providers/shared/Bussiness-Operator';
-
-
-
-
-//import { HttpRequestInterceptorProvider } from '../providers/shared/http-request-interceptor';
-
-
+import { BusinessOperatorProvider } from '../providers/shared/business-operator';
+import { sampleoperationsdialogComponent } from '../pages/sample/Component/sample-operations/sample-operations-dialog/sample-operations-dialog'
+import {samplestoreProvider} from '../pages/sample/provider/samplestore/samplestore';
+import {sampleBusinessProvider}  from '../pages/sample/provider/sample-business/sample-business';
+import { samplePage } from '../pages/sample/sample';
+import {sampleOperationsComponent} from '../pages/sample/Component/sample-operations/sample-operations';
 
 
 export function translateFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
 
 @NgModule({
   declarations: [
@@ -41,10 +32,9 @@ export function translateFactory(http: HttpClient) {
     HomePage,
     LoginPage,
     HeaderComponent,
-    SamplePage,
-    
-    SampleOperationsComponent,
-    SampleoperationsdialogComponent
+    samplePage,
+    sampleOperationsComponent,
+    sampleoperationsdialogComponent
   ],
   imports: [
     BrowserModule,
@@ -63,9 +53,8 @@ export function translateFactory(http: HttpClient) {
     MyApp,
     HomePage,
     LoginPage,
-    SamplePage,
-    
-    SampleoperationsdialogComponent
+    samplePage,
+    sampleoperationsdialogComponent
   ],
   providers: [
 
@@ -73,16 +62,18 @@ export function translateFactory(http: HttpClient) {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BussinessOperatorProvider,
+    BusinessOperatorProvider,
     HttpClient,
     LoginProvider,
     AuthServiceProvider,
     {provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorProvider,
+      useClass: HttpinterceptorProvider,
       multi: true},
-    SampleBussinessProvider,
-    SamplestoreProvider,
+    sampleBusinessProvider,
+    samplestoreProvider,
      
   ]
 })
 export class AppModule {}
+
+

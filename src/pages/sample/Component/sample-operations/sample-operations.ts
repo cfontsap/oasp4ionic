@@ -1,43 +1,42 @@
-import { SamplePage } from '../../sample';
+
+import { samplePage } from '../../sample';
 import { AlertController, ModalController } from 'ionic-angular';
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { SampleoperationsdialogComponent } from './sample-operations-dialog/sample-operations-dialog'
-import { SamplestoreProvider } from '../../provider/samplestore/samplestore';
-import { SampleBussinessProvider } from '../../provider/sampleBussiness/sampleBussiness';
+import { sampleoperationsdialogComponent } from './sample-operations-dialog/sample-operations-dialog'
+import { samplestoreProvider } from '../../provider/samplestore/samplestore';
+import { sampleBusinessProvider } from '../../provider/sample-business/sample-business';
 /**
- * Generated class for the TableOperationsComponent component.
+ * Generated class for the sampleOperationsComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
 
-export interface SampleItem{
-  name:string ,
-  surname:string,
-  age:number,
+export interface sampleItem{
+    name: String ,    surname: String ,    age: number ,
 }
 
 @Component({
   selector: 'sample-operations',
   templateUrl: 'sample-operations.html'
 })
-export class SampleOperationsComponent {
+export class sampleOperationsComponent {
 
   DeleteTranslations: any = {};
-  interfaceuser : SampleItem = { name:null, surname:null, age: null, };
+  interfaceuser : sampleItem = { name:null, surname:null, age:null, };
   tabletoshow: any;
   DeleteButtonnames=["dismiss","confirm"];
   DeleteButtons=[
-                 { text: this.getTranslation('ionBasic.Sample.operations.delete.dismiss'), handler: data => {  }}, 
-                 { text: this.getTranslation('ionBasic.Sample.operations.delete.confirm'), handler: data => { this.DeleteConfirmed(); } }
+                 { text: "", handler: data => {  }}, 
+                 { text: "", handler: data => { this.DeleteConfirmed(); } }
                 ]
 
   @Input() isDisabled: boolean = true;
 
   constructor(public translate: TranslateService, public alertCtrl: AlertController,
-    public sampleManagement: SampleBussinessProvider, public SamplePage: SamplePage,
-    public modalCtrl: ModalController, public store: SamplestoreProvider) {
+    public sampleBusiness: sampleBusinessProvider, public samplePage: samplePage,
+    public modalCtrl: ModalController, public store: samplestoreProvider) {
   }
 
 
@@ -50,9 +49,9 @@ export class SampleOperationsComponent {
     this.translate.onLangChange.subscribe(
       () => {
        for (let i in this.DeleteButtons){
-          this.translate.get("ionBasic.Sample.operations.delete."+this.DeleteButtonnames[i]).subscribe(
+          this.translate.get("ionicBasic.sample.operations.delete."+this.DeleteButtonnames[i]).subscribe(
             (data:any) => {
-              this.DeleteButtons[i] = data;
+              this.DeleteButtons[i].text = data;
             }
           )
       }
@@ -63,41 +62,41 @@ export class SampleOperationsComponent {
 
   promptFilterClicked() {
     this.isDisabled = true;
-    let modal = this.modalCtrl.create(SampleoperationsdialogComponent, { dialog: "filter", edit: null });
+    let modal = this.modalCtrl.create(sampleoperationsdialogComponent, { dialog: "filter", edit: null });
     modal.present();
-    modal.onDidDismiss(() => this.SamplePage.reloadSamplePageTable());
+    modal.onDidDismiss(() => this.samplePage.reloadsamplePageTable());
   }
 
   //Add Operation
   promptAddClicked() {
 
-    let modal = this.modalCtrl.create(SampleoperationsdialogComponent, { dialog: "add", edit: null });
+    let modal = this.modalCtrl.create(sampleoperationsdialogComponent, { dialog: "add", edit: null });
     modal.present();
     modal.onDidDismiss(() => 
-    this.SamplePage.reloadSamplePageTable()
+    this.samplePage.reloadsamplePageTable()
     );
   }
   
   // deletes the selected element
   DeleteConfirmed() {
-    let index = this.SamplePage.getindex(); // i get the index of the item to delete in the table we have in the view
+    let index = this.samplePage.getindex();
     if (!index && index != 0) {
       return;
-    }
+      }
     let cleanuser = this.interfaceuser;
-    let search = this.SamplePage.tabletoshow[index]
+    let search = this.samplePage.tabletoshow[index]
     for(let i in cleanuser){
       cleanuser[i] = search[i];
     }
-    this.sampleManagement.getItemId(cleanuser).subscribe(
+    this.sampleBusiness.getItemId(cleanuser).subscribe(
       (Idresponse: any) => {
-        this.sampleManagement.DeleteItem(Idresponse.result[0].id).subscribe(
+        this.sampleBusiness.DeleteItem(Idresponse.result[0].id).subscribe(
           (deleteresponse) => {
             
-            this.sampleManagement.getTableM().subscribe(
+            this.sampleBusiness.getTableM().subscribe(
               (data:any) => {
                 this.store.setTable(data.result);
-                this.SamplePage.reloadSamplePageTable();
+                this.samplePage.reloadsamplePageTable();
               }
             );
             
@@ -109,7 +108,10 @@ export class SampleOperationsComponent {
 
   DeleteConfirmForm() {
     
-    this.DeleteTranslations = this.getTranslation('ionBasic.Sample.operations.delete');
+    this.DeleteTranslations = this.getTranslation('ionicBasic.sample.operations.delete');
+    for (let i in this.DeleteButtons){
+      this.DeleteButtons[i].text=this.DeleteTranslations[this.DeleteButtonnames[i]];
+    }
     let prompt = this.alertCtrl.create({
       title: this.DeleteTranslations.title,
       message: this.DeleteTranslations.message,
@@ -121,13 +123,13 @@ export class SampleOperationsComponent {
   }
 
   promptModifyClicked() {
-    let index = this.SamplePage.getindex();
+    let index = this.samplePage.getindex();
     if (!index && index != 0) {
       return;
     }
-    let modal = this.modalCtrl.create(SampleoperationsdialogComponent, { dialog: "modify", edit:this.store.getTable()[index]});
+    let modal = this.modalCtrl.create(sampleoperationsdialogComponent, { dialog: "modify", edit:this.store.getTable()[index]});
     modal.present();
-    modal.onDidDismiss(() => this.SamplePage.reloadSamplePageTable());
+    modal.onDidDismiss(() => this.samplePage.reloadsamplePageTable());
     
   }
 }

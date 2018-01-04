@@ -1,5 +1,6 @@
+
 import { NavController } from 'ionic-angular';
-import { AuthServiceProvider } from '../../providers/security/auth-Service';
+import { AuthServiceProvider } from '../../providers/security/auth-service';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, Input } from '@angular/core';
 import { LoginPage } from '../../pages/Login/Login';
@@ -11,6 +12,7 @@ import { LoginPage } from '../../pages/Login/Login';
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
+
 @Component({
   selector: 'layoutheader',
   templateUrl: 'header.html'
@@ -35,7 +37,8 @@ export class HeaderComponent {
     return true;
   }
 
-  togglelanguage(lang: string) : void{ 
+  togglelanguage(lang: string) : void{
+    
     this.translate.use(lang);
     this.currentlanguage = lang;
   }
@@ -44,7 +47,6 @@ export class HeaderComponent {
     //ionic uses a jwt token for security, we don't need to connect to the server since we don't have a season, erasing the jwt is enough.
     this.auth.setAuthenthicated(false);
     this.auth.setToken("");
-    this.translate.use(this.translate.defaultLang);
     this.navCtrl.setRoot(LoginPage);
   }
 
